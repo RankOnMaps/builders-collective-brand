@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Builders Collective — First Appointment Pack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;900&family=Inter:wght@400;500;600&family=Fraunces:ital,wght@1,200;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest: #0F3D20;
+  --forest-deep: #08291A;
+  --forest-soft: #1B5A30;
+  --paper: #F8F6F1;
+  --cream: #EFEAD8;
+  --stone: #1A1A1A;
+  --stone-soft: #4A4A4A;
+  --spark: #E8FB94;
+  --spark-deep: #C9DC73;
+  --rule: rgba(26,26,26,0.12);
+  --rule-light: rgba(248,246,241,0.18);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { background: #E5E1D6; }
+body { font-family: 'Inter', -apple-system, sans-serif; color: var(--stone); -webkit-font-smoothing: antialiased; padding: 48px 0; }
+
+.page { width: 1240px; height: 1754px; margin: 0 auto 48px; background: var(--paper); position: relative; overflow: hidden; box-shadow: 0 12px 48px rgba(0,0,0,0.18); page-break-after: always; }
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+.italic-serif { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; }
+
+/* shared */
+.apex { width: 56px; height: 28px; background: var(--spark); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.apex.sm { width: 32px; height: 16px; }
+.apex.lg { width: 96px; height: 48px; }
+.apex.xl { width: 160px; height: 80px; }
+
+.spec-strip { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; }
+.page-num { position: absolute; bottom: 32px; right: 48px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: rgba(26,26,26,0.4); text-transform: uppercase; }
+.page-brand { position: absolute; bottom: 32px; left: 48px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: rgba(26,26,26,0.4); text-transform: uppercase; }
+.page.dark .page-num, .page.dark .page-brand { color: rgba(248,246,241,0.4); }
+
+.wm-builders { font-family: 'Inter Tight', sans-serif; font-weight: 900; letter-spacing: -0.035em; line-height: 0.82; }
+.wm-collective { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; line-height: 1; letter-spacing: -0.02em; }
+
+.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,26,26,0.55); }
+.eyebrow.light { color: rgba(248,246,241,0.6); }
+
+.title-display { font-family: 'Inter Tight', sans-serif; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
+.title-italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; letter-spacing: -0.015em; line-height: 1.1; }
+
+.body-text { font-family: 'Inter', sans-serif; font-size: 17px; line-height: 1.6; color: var(--stone); }
+.body-text-light { color: rgba(248,246,241,0.85); }
+
+.apex-bullets { list-style: none; }
+.apex-bullets li { display: flex; align-items: flex-start; gap: 16px; padding: 11px 0; font-family: 'Inter', sans-serif; font-size: 17px; line-height: 1.5; }
+.apex-bullets li::before { content: ''; width: 14px; height: 10px; background: var(--forest); clip-path: polygon(50% 0, 100% 100%, 0 100%); flex-shrink: 0; margin-top: 8px; }
+.apex-bullets.light li::before { background: var(--spark); }
+.apex-bullets.light li { color: rgba(248,246,241,0.92); }
+
+.stage-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; padding: 9px 18px; border: 1px solid currentColor; border-radius: 100px; display: inline-flex; align-items: center; gap: 10px; }
+.stage-tag .num { font-weight: 700; }
+.stage-tag.active { background: var(--spark); border-color: var(--spark); color: var(--forest); }
+
+.grid-bg { background-image: linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 48px 48px; position: absolute; inset: 0; pointer-events: none; }
+.grid-bg.dark-paper { background-image: linear-gradient(to right, rgba(26,26,26,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(26,26,26,0.05) 1px, transparent 1px); }
+
+/* ============ PAGE 1 · COVER ============ */
+.p1 { background: var(--forest); color: var(--paper); }
+.p1-meta { position: absolute; top: 56px; left: 56px; right: 56px; display: flex; justify-content: space-between; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--rule-light); }
+.p1-wm { position: absolute; top: 50%; left: 56px; transform: translateY(-50%); }
+.p1-tag { position: absolute; bottom: 200px; left: 56px; right: 56px; }
+.p1-strip { position: absolute; bottom: 100px; left: 56px; right: 56px; padding-top: 24px; border-top: 1px solid var(--rule-light); display: flex; gap: 40px; flex-wrap: wrap; color: rgba(248,246,241,0.6); }
+
+/* ============ PAGE 2 · WELCOME ============ */
+.p2 { background: var(--paper); }
+.p2-eyebrow { position: absolute; top: 80px; left: 80px; }
+.p2-title { position: absolute; top: 220px; left: 80px; right: 80px; }
+.p2-block { position: absolute; bottom: 120px; left: 80px; right: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; }
+
+/* ============ PAGE 3 · BUYER SCENARIOS ============ */
+.p3 { background: var(--paper); }
+.p3-top { padding: 80px 80px 48px; }
+.p3-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 0 80px; }
+.scenario { background: var(--cream); padding: 36px; min-height: 360px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+.scenario.dark { background: var(--forest); color: var(--paper); }
+.scenario.spark { background: var(--spark); color: var(--forest); }
+.scenario.outline { background: var(--paper); border: 1.5px solid var(--forest); color: var(--forest); }
+.scenario-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; opacity: 0.6; }
+.scenario-title { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 38px; line-height: 1.1; letter-spacing: -0.015em; margin-top: 16px; }
+.scenario-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; padding: 7px 14px; border: 1px solid currentColor; border-radius: 100px; align-self: flex-start; opacity: 0.85; }
+
+/* ============ PAGE 4 · FINANCE ============ */
+.p4 { background: var(--paper); }
+.p4-top { padding: 80px 80px 48px; }
+.p4-hero-strip { background: var(--forest); color: var(--paper); padding: 56px 80px; margin: 0; position: relative; }
+.p4-numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 0; margin-top: 40px; border-top: 1px solid var(--rule-light); }
+.p4-num { padding: 28px 24px; border-right: 1px solid var(--rule-light); }
+.p4-num:last-child { border-right: none; }
+.p4-num-value { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 36px; color: var(--spark); letter-spacing: -0.02em; line-height: 1; }
+.p4-num-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(248,246,241,0.6); margin-top: 8px; }
+.p4-list { padding: 64px 80px 0; }
+
+/* ============ PAGE 5 · MYTHS BUSTED ============ */
+.p5 { background: var(--paper); }
+.p5-top { padding: 80px 80px 32px; }
+.p5-list { padding: 32px 80px; }
+.myth { padding: 32px 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 80px 1fr; gap: 32px; align-items: start; }
+.myth:last-child { border-bottom: 1px solid var(--rule); }
+.myth-num { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 36px; color: var(--forest); letter-spacing: -0.02em; line-height: 1; }
+.myth-q { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 24px; color: var(--stone-soft); line-height: 1.25; margin-bottom: 12px; }
+.myth-a { font-family: 'Inter', sans-serif; font-size: 16px; color: var(--stone); line-height: 1.55; }
+.myth-a b { color: var(--forest); font-weight: 600; }
+
+/* ============ PAGE 6 · WHY US ============ */
+.p6 { background: var(--forest); color: var(--paper); }
+.p6-top { padding: 80px; }
+.p6-block { padding: 0 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.p6-stats { padding: 80px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--rule-light); margin-top: 40px; }
+.p6-stat { padding-right: 24px; border-right: 1px solid var(--rule-light); }
+.p6-stat:last-child { border-right: none; }
+.p6-stat-value { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 56px; color: var(--spark); letter-spacing: -0.025em; line-height: 1; }
+.p6-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(248,246,241,0.65); margin-top: 12px; line-height: 1.5; }
+
+/* ============ PAGE 7 · 3 STEPS ============ */
+.p7 { background: var(--paper); }
+.p7-top { padding: 80px 80px 48px; }
+.p7-steps { padding: 0 80px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.step-card { background: var(--cream); padding: 36px; min-height: 480px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+.step-card.active { background: var(--forest); color: var(--paper); }
+.step-num { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 96px; color: var(--forest); letter-spacing: -0.04em; line-height: 0.85; }
+.step-card.active .step-num { color: var(--spark); }
+.step-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; }
+.step-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.02em; margin-top: 8px; }
+.step-body { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.55; opacity: 0.85; }
+
+/* ============ PAGE 8 · BUILDING JOURNEY ============ */
+.p8 { background: var(--paper); }
+.p8-top { padding: 80px 80px 32px; }
+.p8-flow { padding: 0 80px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.flow-col { background: var(--cream); padding: 32px; }
+.flow-col.dark { background: var(--forest); color: var(--paper); }
+.flow-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.65; margin-bottom: 8px; }
+.flow-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em; margin-bottom: 24px; }
+.flow-steps { list-style: none; }
+.flow-steps li { display: grid; grid-template-columns: 32px 1fr; gap: 12px; padding: 10px 0; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; align-items: start; }
+.flow-steps li b { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; opacity: 0.6; font-weight: 500; padding-top: 2px; }
+
+/* ============ PAGE 9 · SUBURBS ============ */
+.p9 { background: var(--forest-deep); color: var(--paper); }
+.p9-top { padding: 80px 80px 48px; }
+.p9-tiers { padding: 0 80px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.tier { background: var(--forest); padding: 32px; min-height: 380px; display: flex; flex-direction: column; }
+.tier.featured { background: var(--spark); color: var(--forest); }
+.tier-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; }
+.tier-range { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 38px; letter-spacing: -0.025em; line-height: 1; margin-top: 8px; }
+.tier-count { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 18px; margin-top: 4px; opacity: 0.85; }
+.tier-suburbs { margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; line-height: 2; opacity: 0.85; text-transform: uppercase; }
+.tier-suburbs b { font-weight: 500; }
+.p9-source { padding: 24px 80px 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: rgba(248,246,241,0.4); text-transform: uppercase; }
+
+/* ============ PAGE 10 · HOUSE AND LAND ============ */
+.p10 { background: var(--paper); }
+.p10-top { padding: 80px 80px 48px; }
+.p10-grid { padding: 0 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.cost-table { width: 100%; }
+.cost-row { display: grid; grid-template-columns: 1fr auto; padding: 18px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.cost-label { font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 18px; }
+.cost-value { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: rgba(26,26,26,0.45); letter-spacing: 0.05em; }
+.cost-row.total { background: var(--spark); padding: 18px 18px; margin-top: 8px; border: none; }
+.cost-row.total .cost-label { font-size: 22px; color: var(--forest); }
+.cost-row.total .cost-value { color: var(--forest); font-weight: 700; font-size: 18px; opacity: 1; }
+.cost-note { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 26px; color: var(--forest); line-height: 1.25; letter-spacing: -0.015em; }
+.cost-note-body { font-family: 'Inter', sans-serif; font-size: 15px; color: var(--stone-soft); margin-top: 16px; line-height: 1.55; }
+
+/* ============ PAGE 11 · THE SHORTLIST (NEW) ============ */
+.p11 { background: var(--paper); }
+.p11-top { padding: 80px 80px 48px; }
+.p11-stamp-row { padding: 0 80px; display: flex; gap: 32px; align-items: center; margin-bottom: 32px; }
+.stamp { width: 160px; height: 160px; border-radius: 50%; border: 2px solid var(--forest); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px; text-align: center; position: relative; flex-shrink: 0; }
+.stamp::before, .stamp::after { content: ''; position: absolute; left: 10px; right: 10px; height: 1px; background: var(--forest); }
+.stamp::before { top: 32px; }
+.stamp::after { bottom: 32px; }
+.stamp-top { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--forest); position: absolute; top: 14px; }
+.stamp-mid { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 26px; color: var(--forest); letter-spacing: -0.02em; line-height: 1; }
+.stamp-mid-sub { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 13px; color: var(--forest); margin-top: 4px; }
+.stamp-bot { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--forest); position: absolute; bottom: 14px; }
+.stamp-pitch { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 26px; color: var(--forest); line-height: 1.25; letter-spacing: -0.015em; }
+.p11-table-wrap { padding: 0 80px; }
+.shortlist-table { width: 100%; border: 1px solid var(--rule); }
+.shortlist-table > div { padding: 18px 22px; border-right: 1px solid var(--rule); }
+.shortlist-table .sl-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; border-bottom: 1px solid var(--rule); }
+.shortlist-table .sl-grid:last-child { border-bottom: none; }
+.shortlist-table .sl-grid.header { background: var(--forest); color: var(--paper); }
+.shortlist-table .sl-grid.header > div { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; border-right-color: var(--rule-light); }
+.shortlist-table .sl-grid.row > div { font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.04em; }
+.shortlist-table .sl-grid.row.pick { background: var(--spark); }
+.shortlist-table .sl-grid.row.pick > div { font-weight: 500; }
+.sl-name { font-family: 'Inter Tight', sans-serif !important; font-weight: 700 !important; font-size: 16px !important; letter-spacing: -0.01em; }
+.p11-foot { padding: 32px 80px 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 22px; color: var(--stone-soft); line-height: 1.3; letter-spacing: -0.01em; }
+
+/* ============ PAGE 12 · NEXT STEP ============ */
+.p12 { background: var(--paper); }
+.p12-top { padding: 80px 80px 48px; }
+.p12-content { padding: 0 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.next-card { background: var(--cream); padding: 40px; }
+.next-num { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 72px; color: var(--forest); letter-spacing: -0.04em; line-height: 0.85; margin-bottom: 12px; }
+.next-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--forest); }
+.next-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.02em; margin-top: 12px; }
+.next-body { font-family: 'Inter', sans-serif; font-size: 15px; color: var(--stone-soft); margin-top: 12px; line-height: 1.6; }
+.timeline-strip { background: var(--forest); color: var(--paper); padding: 32px 40px; margin-top: 32px; }
+.timeline-strip-mono { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--spark); }
+.timeline-strip-title { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 26px; line-height: 1.2; margin-top: 8px; letter-spacing: -0.01em; }
+
+/* ============ PAGE 13 · CONTACT ============ */
+.p13 { background: var(--forest); color: var(--paper); }
+.p13-wm { position: absolute; top: 56px; left: 56px; right: 56px; }
+.p13-title { position: absolute; top: 50%; left: 80px; right: 80px; transform: translateY(-50%); }
+.p13-card { position: absolute; bottom: 200px; right: 80px; background: var(--paper); color: var(--stone); padding: 40px; min-width: 460px; }
+.contact-row { padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.contact-row:last-child { border-bottom: none; }
+.contact-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,26,26,0.55); }
+.contact-value { font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 19px; color: var(--stone); margin-top: 4px; letter-spacing: -0.01em; }
+
+/* print */
+@media print {
+  html, body { background: white; padding: 0; margin: 0; }
+  body { padding: 0; }
+  .page { margin: 0; box-shadow: none; page-break-after: always; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 · COVER ============ -->
+<div class="page p1 dark">
+  <div class="grid-bg"></div>
+  <div class="p1-meta">
+    <div class="spec-strip" style="color: rgba(248,246,241,0.55);">First Appointment Pack</div>
+    <div class="spec-strip" style="color: rgba(248,246,241,0.55);">2026 · Perth WA</div>
+  </div>
+  <div class="p1-wm">
+    <div class="apex xl"></div>
+    <div class="wm-builders" style="font-size: 168px; color: var(--paper); margin-top: 32px;">BUILDERS</div>
+    <div class="wm-collective" style="font-size: 108px; color: var(--paper); margin-top: 8px;">collective</div>
+  </div>
+  <div class="p1-tag">
+    <div class="title-italic" style="font-size: 44px; color: rgba(248,246,241,0.95); max-width: 880px;">your shortlist of perth builders.</div>
+  </div>
+  <div class="p1-strip">
+    <span>Finance</span>
+    <span>·</span>
+    <span>Land</span>
+    <span>·</span>
+    <span>Build</span>
+    <span>·</span>
+    <span>One Broker</span>
+  </div>
+  <div class="page-brand">Builders Collective</div>
+  <div class="page-num">01 · Cover</div>
+</div>
+
+<!-- ============ PAGE 2 · WELCOME ============ -->
+<div class="page p2">
+  <div class="p2-eyebrow eyebrow">Welcome · The Brief</div>
+  <div class="p2-title">
+    <div class="title-display" style="font-size: 108px; color: var(--forest);">Your shortlist<br>of Perth<br><span class="title-italic" style="font-size: 108px;">builders.</span></div>
+  </div>
+  <div class="p2-block">
+    <div>
+      <div class="eyebrow" style="margin-bottom: 16px;">Who we are</div>
+      <div class="body-text" style="font-size: 18px;">Builders Collective is a building broker for Perth buyers. We sit on your side of the table, line up four builders for the same brief, and compare them side by side. Same budget. Same suburb. You see all the prices. They compete for your build.</div>
+    </div>
+    <div>
+      <div class="eyebrow" style="margin-bottom: 16px;">What it costs you</div>
+      <div class="title-italic" style="font-size: 36px; color: var(--forest);">nothing extra.</div>
+      <div class="body-text" style="font-size: 16px; margin-top: 12px; color: var(--stone-soft);">Our fee is paid by the builder, fixed, the same way an in-house consultant gets paid. You pay wholesale, not retail.</div>
+    </div>
+  </div>
+  <div class="page-brand">Builders Collective · The Broker</div>
+  <div class="page-num">02 · Welcome</div>
+</div>
+
+<!-- ============ PAGE 3 · BUYER SCENARIOS ============ -->
+<div class="page p3">
+  <div class="p3-top">
+    <div class="eyebrow">Page 03 · Why You're Here</div>
+    <div class="title-display" style="font-size: 88px; color: var(--forest); margin-top: 16px;">what has you <span class="title-italic" style="font-size: 88px;">looking?</span></div>
+    <div class="body-text" style="margin-top: 24px; max-width: 720px; color: var(--stone-soft);">Pick whichever fits. The shortlist looks different for each.</div>
+  </div>
+  <div class="p3-grid">
+    <div class="scenario dark">
+      <div>
+        <div class="scenario-num">01</div>
+        <div class="scenario-title" style="color: var(--spark);">starting a family.</div>
+      </div>
+      <div>
+        <div class="body-text body-text-light" style="font-size: 15px;">Outgrowing the rental, second bedroom needed, school zones matter. Looking 4-bed, suburb-priority over price.</div>
+        <div class="scenario-tag" style="margin-top: 20px; color: var(--spark); border-color: var(--spark);">First Home · Upgrader</div>
+      </div>
+    </div>
+    <div class="scenario spark">
+      <div>
+        <div class="scenario-num">02</div>
+        <div class="scenario-title">building equity, not a landlord's.</div>
+      </div>
+      <div>
+        <div class="body-text" style="font-size: 15px; color: var(--forest);">Rent is dead money. You want a mortgage that ends and a home that grows in value. Looking entry-level house and land.</div>
+        <div class="scenario-tag" style="margin-top: 20px;">First Home · Escape Rent</div>
+      </div>
+    </div>
+    <div class="scenario outline">
+      <div>
+        <div class="scenario-num">03</div>
+        <div class="scenario-title">downsizing on your terms.</div>
+      </div>
+      <div>
+        <div class="body-text" style="font-size: 15px; color: var(--stone-soft);">Kids moved out, big house is too much. You want single-storey, lock-and-leave, in a suburb you already know.</div>
+        <div class="scenario-tag" style="margin-top: 20px;">Downsizer · Turnkey</div>
+      </div>
+    </div>
+    <div class="scenario">
+      <div>
+        <div class="scenario-num">04</div>
+        <div class="scenario-title" style="color: var(--forest);">not sure where to start.</div>
+      </div>
+      <div>
+        <div class="body-text" style="font-size: 15px; color: var(--stone-soft);">You know building is the next step. You don't know which builder, which suburb, or whether your finance is even going to work. We start here.</div>
+        <div class="scenario-tag" style="margin-top: 20px; color: var(--forest);">First Conversation</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-brand">Builders Collective</div>
+  <div class="page-num">03 · Scenarios</div>
+</div>
+
+<!-- ============ PAGE 4 · FINANCE ============ -->
+<div class="page p4">
+  <div class="p4-top">
+    <div class="eyebrow">Page 04 · Step One</div>
+    <div class="title-display" style="font-size: 88px; color: var(--forest); margin-top: 16px;">finance,<br><span class="title-italic" style="font-size: 88px;">first.</span></div>
+    <div class="body-text" style="margin-top: 24px; max-width: 780px; color: var(--stone-soft); font-size: 18px;">Before we shortlist a single builder, we line up your finance. Our in-house team prepares your Letter of Eligibility in 48 hours. Everything after this is built on a real number, not a guess.</div>
+  </div>
+  <div class="p4-hero-strip">
+    <div class="eyebrow light">By the numbers</div>
+    <div class="title-italic" style="font-size: 38px; color: var(--paper); margin-top: 12px;">what's on the table for a first home buyer.</div>
+    <div class="p4-numbers">
+      <div class="p4-num">
+        <div class="p4-num-value">$10K</div>
+        <div class="p4-num-label">First Home Owner Grant</div>
+      </div>
+      <div class="p4-num">
+        <div class="p4-num-value">48 hrs</div>
+        <div class="p4-num-label">LOE prep · in-house</div>
+      </div>
+      <div class="p4-num">
+        <div class="p4-num-value">5%</div>
+        <div class="p4-num-label">Low-deposit programs</div>
+      </div>
+      <div class="p4-num">
+        <div class="p4-num-value">$0</div>
+        <div class="p4-num-label">Our fee to you</div>
+      </div>
+    </div>
+  </div>
+  <div class="p4-list">
+    <div class="eyebrow">What you get from the finance side</div>
+    <ul class="apex-bullets" style="margin-top: 16px;">
+      <li>Finance specialists who understand the build process, not just the mortgage.</li>
+      <li>Every eligible government grant checked, including First Home Owner Grant.</li>
+      <li>Low-deposit and government-assisted programs mapped to your situation.</li>
+      <li>One point of contact through finance, land, and build. No re-explaining yourself.</li>
+    </ul>
+  </div>
+  <div class="page-brand">Builders Collective · Finance</div>
+  <div class="page-num">04 · Finance</div>
+</div>
+
+<!-- ============ PAGE 5 · MYTHS ============ -->
+<div class="page p5">
+  <div class="p5-top">
+    <div class="eyebrow">Page 05 · Reset</div>
+    <div class="title-display" style="font-size: 88px; color: var(--forest); margin-top: 16px;">five things buyers<br>get <span class="title-italic" style="font-size: 88px;">wrong.</span></div>
+  </div>
+  <div class="p5-list">
+    <div class="myth">
+      <div class="myth-num">01</div>
+      <div>
+        <div class="myth-q">"going direct to a builder is cheaper."</div>
+        <div class="myth-a">Going direct is <b>retail</b>. We access the same builders at <b>wholesale</b> through volume agreements. Most clients save $25K to $45K on the same build.</div>
+      </div>
+    </div>
+    <div class="myth">
+      <div class="myth-num">02</div>
+      <div>
+        <div class="myth-q">"you'll just push me toward one builder."</div>
+        <div class="myth-a">We compare <b>four</b> builders on the same brief, same budget, same suburb. You see every quote side by side. You pick.</div>
+      </div>
+    </div>
+    <div class="myth">
+      <div class="myth-num">03</div>
+      <div>
+        <div class="myth-q">"i can handle this myself, it's not that hard."</div>
+        <div class="myth-a">Hidden costs, contract traps, and prestart upsells catch most first-time buyers off guard. Average overspend going solo: <b>$18K–$30K</b> against the original quote.</div>
+      </div>
+    </div>
+    <div class="myth">
+      <div class="myth-num">04</div>
+      <div>
+        <div class="myth-q">"using a broker makes everything more complicated."</div>
+        <div class="myth-a">One point of contact from finance to keys. We coordinate the trades, the certifier, the bank. You get one phone number, one inbox.</div>
+      </div>
+    </div>
+    <div class="myth">
+      <div class="myth-num">05</div>
+      <div>
+        <div class="myth-q">"there must be a fee on top of the build."</div>
+        <div class="myth-a">There isn't. We're paid a <b>fixed fee by the builder</b>, the same way an in-house display village consultant is paid. The price you see is the price you pay.</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-brand">Builders Collective · Myths</div>
+  <div class="page-num">05 · Myths</div>
+</div>
+
+<!-- ============ PAGE 6 · WHY US ============ -->
+<div class="page p6 dark">
+  <div class="grid-bg"></div>
+  <div class="p6-top">
+    <div class="eyebrow light">Page 06 · The Model</div>
+    <div class="title-display" style="font-size: 88px; color: var(--paper); margin-top: 16px;">your side<br>of the <span class="title-italic" style="font-size: 88px; color: var(--spark);">table.</span></div>
+  </div>
+  <div class="p6-block">
+    <div>
+      <div class="eyebrow light" style="margin-bottom: 16px;">The trusted-network bit</div>
+      <div class="body-text" style="color: rgba(248,246,241,0.92); font-size: 18px;">We work with a curated panel of Perth's reputable building companies, backed by 40+ years of combined residential and commercial experience. First homes, knockdown-rebuilds, double-storey, turnkey, rear battle-axe builds — our panel has a specialist for each.</div>
+    </div>
+    <div>
+      <div class="eyebrow light" style="margin-bottom: 16px;">The way we work</div>
+      <ul class="apex-bullets light">
+        <li>Multiple builders compared, never just one.</li>
+        <li>Wholesale pricing through volume agreements.</li>
+        <li>Off-market land in 60+ Perth suburbs, including infill sites.</li>
+        <li>Hundreds of professionally-designed home plans.</li>
+        <li>One project manager, finance through to keys.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="p6-stats">
+    <div class="p6-stat">
+      <div class="p6-stat-value">60+</div>
+      <div class="p6-stat-label">Perth suburbs on the panel</div>
+    </div>
+    <div class="p6-stat">
+      <div class="p6-stat-value">40+ yrs</div>
+      <div class="p6-stat-label">Combined builder experience</div>
+    </div>
+    <div class="p6-stat">
+      <div class="p6-stat-value" style="font-size: 56px;">100s</div>
+      <div class="p6-stat-label">Home designs on the shelf</div>
+    </div>
+  </div>
+  <div class="page-brand">Builders Collective · The Model</div>
+  <div class="page-num">06 · Why Us</div>
+</div>
+
+<!-- ============ PAGE 7 · 3 STEPS ============ -->
+<div class="page p7">
+  <div class="p7-top">
+    <div class="eyebrow">Page 07 · The Path</div>
+    <div class="title-display" style="font-size: 88px; color: var(--forest); margin-top: 16px;">your home<br>in three <span class="title-italic" style="font-size: 88px;">moves.</span></div>
+  </div>
+  <div class="p7-steps">
+    <div class="step-card active">
+      <div>
+        <div class="step-num" style="color: var(--spark);">01</div>
+        <div class="step-tag" style="color: var(--spark); margin-top: 16px;">Step One</div>
+        <div class="step-title">Finance</div>
+      </div>
+      <div class="step-body" style="color: rgba(248,246,241,0.85);">In-house finance team prepares your LOE in 48 hours. Every grant checked. Real number, not a guess. Everything that comes after sits on this.</div>
+    </div>
+    <div class="step-card">
+      <div>
+        <div class="step-num">02</div>
+        <div class="step-tag" style="color: var(--forest); margin-top: 16px;">Step Two</div>
+        <div class="step-title" style="color: var(--forest);">Land</div>
+      </div>
+      <div class="step-body" style="color: var(--stone-soft);">Access to off-market land in 60+ Perth suburbs through our developer panel, including infill sites that don't reach the public market. Matched to your finance, your suburb, your build type.</div>
+    </div>
+    <div class="step-card">
+      <div>
+        <div class="step-num">03</div>
+        <div class="step-tag" style="color: var(--forest); margin-top: 16px;">Step Three</div>
+        <div class="step-title" style="color: var(--forest);">Build</div>
+      </div>
+      <div class="step-body" style="color: var(--stone-soft);">Four builders shortlisted on the same brief. Same suburb. Same budget. Side-by-side comparison. You pick. They compete. Wholesale pricing only.</div>
+    </div>
+  </div>
+  <div style="padding: 48px 80px 0;">
+    <div class="eyebrow" style="margin-bottom: 12px;">What's active right now</div>
+    <div style="display: flex; gap: 12px;">
+      <span class="stage-tag active"><span class="num">01</span> Finance</span>
+      <span class="stage-tag" style="color: var(--forest);"><span class="num">02</span> Land</span>
+      <span class="stage-tag" style="color: var(--forest);"><span class="num">03</span> Build</span>
+    </div>
+  </div>
+  <div class="page-brand">Builders Collective</div>
+  <div class="page-num">07 · Three Moves</div>
+</div>
+
+<!-- ============ PAGE 8 · BUILDING JOURNEY ============ -->
+<div class="page p8">
+  <div class="p8-top">
+    <div class="eyebrow">Page 08 · The Full Journey</div>
+    <div class="title-display" style="font-size: 88px; color: var(--forest); margin-top: 16px;">contract to <span class="title-italic" style="font-size: 88px;">keys.</span></div>
+    <div class="body-text" style="margin-top: 24px; max-width: 780px; color: var(--stone-soft);">Fourteen stages, two phases. Admin is the paperwork. Construction is when the slab goes down. We're with you for both.</div>
+  </div>
+  <div class="p8-flow">
+    <div class="flow-col">
+      <div class="flow-label">Phase One</div>
+      <div class="flow-title" style="color: var(--forest);">Admin</div>
+      <ul class="flow-steps">
+        <li><b>01</b><span>PPA</span></li>
+        <li><b>02</b><span>Finance Meeting</span></li>
+        <li><b>03</b><span>Site Survey &amp; Engineer's Reports</span></li>
+        <li><b>04</b><span>Working Drawings</span></li>
+        <li><b>05</b><span>Contract Signing</span></li>
+        <li><b>06</b><span>Formal Finance Approval</span></li>
+        <li><b>07</b><span>Colour Selection Meeting</span></li>
+        <li><b>08</b><span>Shire Building Approval</span></li>
+      </ul>
+    </div>
+    <div class="flow-col dark">
+      <div class="flow-label" style="color: rgba(248,246,241,0.65);">Phase Two</div>
+      <div class="flow-title" style="color: var(--spark);">Construction</div>
+      <ul class="flow-steps">
+        <li style="color: rgba(248,246,241,0.9);"><b style="color: rgba(248,246,241,0.6);">09</b><span>Siteworks</span></li>
+        <li style="color: rgba(248,246,241,0.9);"><b style="color: rgba(248,246,241,0.6);">10</b><span>Slab Down</span></li>
+        <li style="color: rgba(248,246,241,0.9);"><b style="color: rgba(248,246,241,0.6);">11</b><span>Brickwork · Plate Height</span></li>
+        <li style="color: rgba(248,246,241,0.9);"><b style="color: rgba(248,246,241,0.6);">12</b><span>Roof Cover</span></li>
+        <li style="color: rgba(248,246,241,0.9);"><b style="color: rgba(248,246,241,0.6);">13</b><span>Lock-Up</span></li>
+        <li style="color: rgba(248,246,241,0.9);"><b style="color: rgba(248,246,241,0.6);">14</b><span>Internal Finishing &amp; PCI</span></li>
+        <li style="color: var(--spark);"><b style="color: var(--spark);">15</b><span style="font-weight: 600;">Keys.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="page-brand">Builders Collective · The Journey</div>
+  <div class="page-num">08 · Journey</div>
+</div>
+
+<!-- ============ PAGE 9 · SUBURBS ============ -->
+<div class="page p9 dark">
+  <div class="grid-bg"></div>
+  <div class="p9-top">
+    <div class="eyebrow light">Page 09 · Where Your Budget Builds</div>
+    <div class="title-display" style="font-size: 88px; color: var(--paper); margin-top: 16px;">perth, by <span class="title-italic" style="font-size: 88px; color: var(--spark);">price.</span></div>
+    <div class="body-text body-text-light" style="margin-top: 24px; max-width: 780px;">Median established house prices to March 2026. We work the full Perth map but these three bands cover the bulk of first-home and upgrader builds.</div>
+  </div>
+  <div class="p9-tiers">
+    <div class="tier">
+      <div>
+        <div class="tier-label" style="color: var(--spark);">Tier One · Entry</div>
+        <div class="tier-range" style="color: var(--paper);">$630K – $750K</div>
+        <div class="tier-count" style="color: rgba(248,246,241,0.75);">first-home territory</div>
+      </div>
+      <div class="tier-suburbs" style="color: rgba(248,246,241,0.85);">
+        <div><b>ARMADALE</b> $630K</div>
+        <div><b>MIDLAND</b> $640K</div>
+        <div><b>GOSNELLS</b> $675K</div>
+        <div><b>MADDINGTON</b> $680K</div>
+        <div><b>HAYNES</b> $748K</div>
+        <div><b>WELLARD</b> $739K</div>
+      </div>
+    </div>
+    <div class="tier featured">
+      <div>
+        <div class="tier-label">Tier Two · Core</div>
+        <div class="tier-range">$750K – $900K</div>
+        <div class="tier-count">upgrader sweet spot</div>
+      </div>
+      <div class="tier-suburbs" style="color: var(--forest);">
+        <div><b>BYFORD</b> $772K</div>
+        <div><b>BALDIVIS</b> $775K</div>
+        <div><b>AVELEY</b> $810K</div>
+        <div><b>WANNEROO</b> $810K</div>
+        <div><b>HENLEY BROOK</b> $873K</div>
+        <div><b>BEECHBORO</b> $785K</div>
+      </div>
+    </div>
+    <div class="tier">
+      <div>
+        <div class="tier-label" style="color: var(--spark);">Tier Three · Upper</div>
+        <div class="tier-range" style="color: var(--paper);">$900K – $1.2M</div>
+        <div class="tier-count" style="color: rgba(248,246,241,0.75);">downsizer / premium</div>
+      </div>
+      <div class="tier-suburbs" style="color: rgba(248,246,241,0.85);">
+        <div><b>JOONDALUP</b> $930K</div>
+        <div><b>EDGEWATER</b> $998K</div>
+        <div><b>KINROSS</b> $950K</div>
+        <div><b>WOODVALE</b> $1.19M</div>
+        <div><b>DARCH</b> $1.05M</div>
+        <div><b>HILLARYS</b> $1.36M</div>
+      </div>
+    </div>
+  </div>
+  <div class="p9-source">Source · REIWA median established house sales · 12 months to March 2026</div>
+  <div class="page-brand">Builders Collective · Map</div>
+  <div class="page-num">09 · Suburbs</div>
+</div>
+
+<!-- ============ PAGE 10 · HOUSE AND LAND ============ -->
+<div class="page p10">
+  <div class="p10-top">
+    <div class="eyebrow">Page 10 · The Costs</div>
+    <div class="title-display" style="font-size: 88px; color: var(--forest); margin-top: 16px;">the five<br>real <span class="title-italic" style="font-size: 88px;">costs.</span></div>
+  </div>
+  <div class="p10-grid">
+    <div>
+      <div class="eyebrow" style="margin-bottom: 24px;">House and Land · Itemised</div>
+      <div class="cost-table">
+        <div class="cost-row">
+          <div class="cost-label">Land</div>
+          <div class="cost-value">$xxx,xxx</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">Siteworks</div>
+          <div class="cost-value">$xxx,xxx</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">House</div>
+          <div class="cost-value">$xxx,xxx</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">Variations</div>
+          <div class="cost-value">$xxx,xxx</div>
+        </div>
+        <div class="cost-row">
+          <div class="cost-label">PPA Fee</div>
+          <div class="cost-value">$xxx,xxx</div>
+        </div>
+        <div class="cost-row total">
+          <div class="cost-label">Total</div>
+          <div class="cost-value">$xxx,xxx</div>
+        </div>
+      </div>
+      <div class="body-text" style="margin-top: 20px; font-size: 14px; color: rgba(26,26,26,0.55);">Filled in live, on the table, with you. Real builder quotes, not anchored to a brochure.</div>
+    </div>
+    <div>
+      <div class="eyebrow" style="margin-bottom: 24px;">The point of the table</div>
+      <div class="cost-note">no hidden line items.<br>no prestart surprises.<br>no "we'll get back to you<br>on that one."</div>
+      <div class="cost-note-body">Most first-time buyers find $18K to $30K of cost they weren't told about between contract and slab. Our shortlist compares apples to apples on these five lines, every time, so you see the real number before you sign.</div>
+      <ul class="apex-bullets" style="margin-top: 32px; font-size: 15px;">
+        <li>Land price locked at contract.</li>
+        <li>Siteworks quoted on real survey, not estimates.</li>
+        <li>Variations capped and disclosed upfront.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="page-brand">Builders Collective · Costs</div>
+  <div class="page-num">10 · House and Land</div>
+</div>
+
+<!-- ============ PAGE 11 · THE SHORTLIST ============ -->
+<div class="page p11">
+  <div class="p11-top">
+    <div class="eyebrow">Page 11 · The Deliverable</div>
+    <div class="title-display" style="font-size: 88px; color: var(--forest); margin-top: 16px;">your <span class="title-italic" style="font-size: 88px;">shortlist.</span></div>
+    <div class="body-text" style="margin-top: 20px; max-width: 780px; color: var(--stone-soft);">Same brief. Same budget. Same suburb. Four builders quoting against each other. You see all of it.</div>
+  </div>
+  <div class="p11-stamp-row">
+    <div class="stamp">
+      <div class="stamp-top">Wholesale Saving</div>
+      <div class="stamp-mid">$36,300</div>
+      <div class="stamp-mid-sub">on this build</div>
+      <div class="stamp-bot">Byford · 4 BED</div>
+    </div>
+    <div class="stamp-pitch">"this is what going through us<br>vs walking in alone looks like."</div>
+  </div>
+  <div class="p11-table-wrap">
+    <div class="shortlist-table">
+      <div class="sl-grid header">
+        <div>Builder</div>
+        <div>Base Price</div>
+        <div>Wholesale</div>
+        <div>You Save</div>
+        <div>Build Time</div>
+      </div>
+      <div class="sl-grid row">
+        <div class="sl-name">Builder 01</div>
+        <div>$412,000</div>
+        <div>$381,400</div>
+        <div>$30,600</div>
+        <div>11 MO</div>
+      </div>
+      <div class="sl-grid row pick">
+        <div class="sl-name">Builder 02</div>
+        <div>$398,500</div>
+        <div>$362,200</div>
+        <div>$36,300</div>
+        <div>10 MO</div>
+      </div>
+      <div class="sl-grid row">
+        <div class="sl-name">Builder 03</div>
+        <div>$425,000</div>
+        <div>$398,700</div>
+        <div>$26,300</div>
+        <div>12 MO</div>
+      </div>
+      <div class="sl-grid row">
+        <div class="sl-name">Builder 04</div>
+        <div>$441,000</div>
+        <div>$408,500</div>
+        <div>$32,500</div>
+        <div>11 MO</div>
+      </div>
+    </div>
+  </div>
+  <div class="p11-foot">"the chartreuse row is our pick for your brief. you might pick differently. that's the whole point."</div>
+  <div class="page-brand">Builders Collective · Shortlist</div>
+  <div class="page-num">11 · Shortlist</div>
+</div>
+
+<!-- ============ PAGE 12 · NEXT STEP ============ -->
+<div class="page p12">
+  <div class="p12-top">
+    <div class="eyebrow">Page 12 · From Here</div>
+    <div class="title-display" style="font-size: 88px; color: var(--forest); margin-top: 16px;">your next <span class="title-italic" style="font-size: 88px;">move.</span></div>
+  </div>
+  <div class="p12-content">
+    <div>
+      <div class="next-card">
+        <div class="next-num">01</div>
+        <div class="next-tag">This Week</div>
+        <div class="next-title">Finance check.</div>
+        <div class="next-body">We collect your documents and prepare your Letter of Eligibility. Our in-house finance team turns it around in 48 hours. From here, every number that follows is real.</div>
+        <ul class="apex-bullets" style="font-size: 14px; margin-top: 20px;">
+          <li>Documents in by Friday.</li>
+          <li>LOE prepared within 48 hours.</li>
+          <li>Land research begins the day your LOE clears.</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="next-card" style="background: var(--paper); border: 1px solid var(--rule);">
+        <div class="next-num">02</div>
+        <div class="next-tag">Following Week</div>
+        <div class="next-title">Land shortlist.</div>
+        <div class="next-body">We bring three to five matched lots from our developer panel, including off-market and infill. You see suburbs, lot sizes, build constraints, prices, all on one page.</div>
+      </div>
+      <div class="next-card" style="background: var(--paper); border: 1px solid var(--rule); margin-top: 20px;">
+        <div class="next-num">03</div>
+        <div class="next-tag">Week Three</div>
+        <div class="next-title">Builder shortlist.</div>
+        <div class="next-body">Four builders quoting the same brief on your chosen land. Wholesale pricing. Side by side. You pick.</div>
+      </div>
+    </div>
+  </div>
+  <div style="padding: 32px 80px 0;">
+    <div class="timeline-strip">
+      <div class="timeline-strip-mono">Three weeks from here · to your final shortlist</div>
+      <div class="timeline-strip-title">finance, then land, then build. that's the order. that's the speed.</div>
+    </div>
+  </div>
+  <div class="page-brand">Builders Collective · Next Step</div>
+  <div class="page-num">12 · Next Step</div>
+</div>
+
+<!-- ============ PAGE 13 · CONTACT ============ -->
+<div class="page p13 dark">
+  <div class="grid-bg"></div>
+  <div class="p13-wm">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--rule-light);">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div class="apex"></div>
+        <div>
+          <div class="wm-builders" style="font-size: 28px; color: var(--paper);">BUILDERS</div>
+          <div class="wm-collective" style="font-size: 18px; color: var(--paper);">collective</div>
+        </div>
+      </div>
+      <div class="eyebrow light">End of pack · Page 13</div>
+    </div>
+  </div>
+  <div class="p13-title">
+    <div class="eyebrow light">From here</div>
+    <div class="title-display" style="font-size: 132px; color: var(--paper); margin-top: 16px;">any <span class="title-italic" style="font-size: 132px; color: var(--spark);">questions?</span></div>
+    <div class="body-text" style="color: rgba(248,246,241,0.85); margin-top: 32px; max-width: 640px; font-size: 19px;">If anything in this pack wasn't clear, that's a conversation we want to have. Reach us any of the ways below.</div>
+  </div>
+  <div class="p13-card">
+    <div class="contact-row">
+      <div class="contact-label">Email</div>
+      <div class="contact-value">builderscollectiveau@gmail.com</div>
+    </div>
+    <div class="contact-row">
+      <div class="contact-label">Website</div>
+      <div class="contact-value">builderscollective.au</div>
+    </div>
+    <div class="contact-row">
+      <div class="contact-label">Instagram</div>
+      <div class="contact-value">@builderscollectiveau</div>
+    </div>
+    <div class="contact-row">
+      <div class="contact-label">Region</div>
+      <div class="contact-value">Perth WA · 60+ suburbs</div>
+    </div>
+  </div>
+  <div class="page-brand">Builders Collective · The Building Broker</div>
+  <div class="page-num">13 · Contact</div>
+</div>
+
+</body>
+</html>

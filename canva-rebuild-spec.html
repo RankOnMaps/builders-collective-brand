@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Builders Collective — Canva Rebuild Spec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;900&family=Inter:wght@400;500;600&family=Fraunces:ital,wght@1,200;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest: #0F3D20;
+  --forest-deep: #08291A;
+  --paper: #F8F6F1;
+  --cream: #EFEAD8;
+  --stone: #1A1A1A;
+  --stone-soft: #4A4A4A;
+  --spark: #E8FB94;
+  --rule: rgba(26,26,26,0.12);
+  --rule-light: rgba(248,246,241,0.18);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { background: #E5E1D6; }
+body { font-family: 'Inter', -apple-system, sans-serif; color: var(--stone); -webkit-font-smoothing: antialiased; padding: 48px 0; }
+
+.page { width: 1240px; min-height: 1754px; margin: 0 auto 48px; background: var(--paper); position: relative; overflow: hidden; box-shadow: 0 12px 48px rgba(0,0,0,0.18); page-break-after: always; padding: 80px; }
+
+.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,26,26,0.55); }
+.eyebrow.light { color: rgba(248,246,241,0.6); }
+.title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 64px; letter-spacing: -0.025em; line-height: 1; margin-top: 16px; }
+.title .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; }
+.subtitle { font-family: 'Inter', sans-serif; font-size: 17px; color: var(--stone-soft); margin-top: 24px; line-height: 1.55; max-width: 820px; }
+.h3 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.015em; margin-top: 32px; margin-bottom: 16px; color: var(--forest); }
+.body { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.55; color: var(--stone); }
+
+.page-num { position: absolute; bottom: 32px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: rgba(26,26,26,0.4); text-transform: uppercase; }
+.page-brand { position: absolute; bottom: 32px; left: 80px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: rgba(26,26,26,0.4); text-transform: uppercase; }
+.page.dark .page-num, .page.dark .page-brand { color: rgba(248,246,241,0.4); }
+
+.apex-bullets { list-style: none; margin-top: 8px; }
+.apex-bullets li { display: flex; align-items: flex-start; gap: 14px; padding: 9px 0; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.5; }
+.apex-bullets li::before { content: ''; width: 12px; height: 8px; background: var(--forest); clip-path: polygon(50% 0, 100% 100%, 0 100%); flex-shrink: 0; margin-top: 8px; }
+
+/* COVER */
+.cover { background: var(--forest); color: var(--paper); display: flex; flex-direction: column; justify-content: space-between; }
+.cover .meta { display: flex; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid var(--rule-light); }
+.cover .wm-section { padding: 80px 0; }
+.cover-apex { width: 96px; height: 48px; background: var(--spark); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.cover-builders { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 112px; letter-spacing: -0.035em; line-height: 0.82; color: var(--paper); margin-top: 24px; }
+.cover-collective { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 72px; line-height: 1; color: var(--paper); margin-top: 4px; letter-spacing: -0.02em; }
+.cover-title { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 56px; line-height: 1.1; color: var(--paper); max-width: 900px; margin-top: 56px; letter-spacing: -0.015em; }
+.cover-strip { padding-top: 24px; border-top: 1px solid var(--rule-light); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(248,246,241,0.55); display: flex; gap: 32px; flex-wrap: wrap; }
+
+/* COLOR SWATCH */
+.color-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 24px; }
+.color-card { padding: 24px; min-height: 240px; display: flex; flex-direction: column; justify-content: space-between; }
+.color-card.forest { background: var(--forest); color: var(--paper); }
+.color-card.paper { background: var(--paper); border: 1px solid var(--rule); color: var(--stone); }
+.color-card.stone { background: var(--stone); color: var(--paper); }
+.color-card.spark { background: var(--spark); color: var(--stone); }
+.color-role { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; }
+.color-name { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 19px; margin-top: 6px; letter-spacing: -0.01em; }
+.color-hex { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.05em; margin-top: 16px; }
+.color-rgb { font-family: 'JetBrains Mono', monospace; font-size: 10px; opacity: 0.7; margin-top: 4px; }
+
+/* FONT CARDS */
+.font-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 24px; }
+.font-card { border: 1px solid var(--rule); padding: 28px; }
+.font-role { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,26,26,0.55); }
+.font-sample { font-size: 56px; line-height: 1; margin: 16px 0; color: var(--forest); letter-spacing: -0.02em; }
+.font-spec { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--stone-soft); line-height: 1.7; letter-spacing: 0.04em; }
+.font-spec b { color: var(--forest); }
+.font-link { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--forest); margin-top: 12px; display: block; letter-spacing: 0.05em; word-break: break-all; }
+
+/* INSTRUCTION STRIP */
+.instruction { background: var(--cream); padding: 28px 32px; margin-top: 24px; }
+.instruction .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--forest); }
+.instruction-steps { list-style: none; margin-top: 16px; counter-reset: step; }
+.instruction-steps li { display: grid; grid-template-columns: 32px 1fr; gap: 16px; padding: 10px 0; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.5; }
+.instruction-steps li::before { counter-increment: step; content: counter(step, decimal-leading-zero); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--forest); font-weight: 600; letter-spacing: 0.1em; padding-top: 3px; }
+.instruction code { font-family: 'JetBrains Mono', monospace; font-size: 13px; background: var(--paper); padding: 2px 6px; border-radius: 3px; color: var(--forest); }
+
+/* RECURRING ELEMENTS */
+.element-card { border: 1px solid var(--rule); padding: 28px; margin-top: 16px; display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: center; }
+.element-demo { display: flex; align-items: center; justify-content: center; min-height: 140px; padding: 16px; }
+
+.spec-strip-demo { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--forest); padding: 12px 0; border-top: 1px solid var(--forest); border-bottom: 1px solid var(--forest); }
+
+.stage-tag-demo { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; padding: 8px 16px; border: 1px solid var(--forest); color: var(--forest); border-radius: 100px; display: inline-flex; gap: 8px; }
+.stage-tag-demo.active { background: var(--spark); border-color: var(--spark); }
+
+.demo-apex-sm { width: 32px; height: 16px; background: var(--spark); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.demo-apex-md { width: 56px; height: 28px; background: var(--spark); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.demo-apex-lg { width: 96px; height: 48px; background: var(--spark); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+
+.element-name { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: var(--forest); }
+.element-spec { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--stone-soft); margin-top: 8px; line-height: 1.7; letter-spacing: 0.04em; }
+.element-note { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--stone-soft); margin-top: 8px; line-height: 1.5; }
+
+/* PAGE REF GRID */
+.ref-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+.ref-card { border: 1px solid var(--rule); padding: 16px; min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; }
+.ref-card.forest { background: var(--forest); color: var(--paper); border: none; }
+.ref-card.spark { background: var(--spark); }
+.ref-card.cream { background: var(--cream); }
+.ref-num { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 32px; letter-spacing: -0.02em; line-height: 1; }
+.ref-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 15px; margin-top: 6px; letter-spacing: -0.01em; }
+.ref-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.65; }
+.ref-note { font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.4; opacity: 0.85; margin-top: 8px; }
+
+/* VARIABLE FIELDS */
+.var-table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 13px; }
+.var-table thead { background: var(--forest); color: var(--paper); }
+.var-table th { padding: 14px 16px; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
+.var-table td { padding: 12px 16px; border-bottom: 1px solid var(--rule); font-family: 'Inter', sans-serif; vertical-align: top; }
+.var-table tr:nth-child(even) td { background: var(--cream); }
+.var-table .page-col { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--forest); font-weight: 500; letter-spacing: 0.05em; white-space: nowrap; }
+.var-table .field-name { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.05em; color: var(--stone); }
+.var-table .current { color: var(--stone-soft); font-style: italic; font-size: 13px; }
+
+/* CALLOUT */
+.callout { background: var(--forest); color: var(--paper); padding: 32px; margin-top: 24px; }
+.callout .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--spark); }
+.callout .text { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 22px; line-height: 1.3; margin-top: 12px; letter-spacing: -0.01em; }
+.callout .body { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.55; margin-top: 12px; color: rgba(248,246,241,0.85); }
+
+/* DON'T STRIP */
+.dont-do { border: 1.5px solid #C04A1A; padding: 20px; margin-top: 16px; background: rgba(192,74,26,0.05); }
+.dont-do .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #C04A1A; }
+.dont-do ul { list-style: none; margin-top: 8px; }
+.dont-do li { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.55; padding: 4px 0; color: var(--stone); }
+.dont-do li::before { content: '×'; color: #C04A1A; font-weight: 700; margin-right: 10px; }
+
+@media print {
+  html, body { background: white; padding: 0; margin: 0; }
+  body { padding: 0; }
+  .page { margin: 0; box-shadow: none; page-break-after: always; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 · COVER ============ -->
+<div class="page cover dark">
+  <div class="meta">
+    <div class="eyebrow light">Canva Rebuild Spec</div>
+    <div class="eyebrow light">Builders Collective · 2026</div>
+  </div>
+  <div class="wm-section">
+    <div class="cover-apex"></div>
+    <div class="cover-builders">BUILDERS</div>
+    <div class="cover-collective">collective</div>
+    <div class="cover-title">how to rebuild the first appointment pack in canva. so your team can edit it without me.</div>
+  </div>
+  <div class="cover-strip">
+    <span>Brand Kit Setup</span>
+    <span>·</span>
+    <span>Recurring Elements</span>
+    <span>·</span>
+    <span>13 Page Specs</span>
+    <span>·</span>
+    <span>Variable Fields</span>
+    <span>·</span>
+    <span>Edit Workflow</span>
+  </div>
+  <div class="page-brand">Builders Collective · Canva Spec</div>
+  <div class="page-num">01 · Cover</div>
+</div>
+
+<!-- ============ PAGE 2 · HOW TO USE ============ -->
+<div class="page">
+  <div class="eyebrow">02 · How to use this document</div>
+  <div class="title">for whoever's <span class="italic">rebuilding it.</span></div>
+  <div class="subtitle">This document is a handover from Rank On Maps to whoever rebuilds the deck in Canva. Read it once, then build from it. You should never need to ask "what colour?" or "what font here?" while building. If you do, this doc has failed and we'll fix it.</div>
+
+  <div class="h3">Who's reading this</div>
+  <div class="body">
+    <ul class="apex-bullets">
+      <li><b>A Canva designer</b> (Fiverr / Upwork / your own contractor) executing a one-time rebuild. Estimated time: 3 to 4 hours.</li>
+      <li><b>The Builders Collective team</b> using the resulting Canva file to personalise per client. They never touch the master template, just duplicate and edit specific fields.</li>
+    </ul>
+  </div>
+
+  <div class="h3">What you need before you start</div>
+  <div class="body">
+    <ul class="apex-bullets">
+      <li><b>Canva Pro plan</b> (required for custom brand fonts, brand kit, and high-quality PDF export with embedded fonts).</li>
+      <li>The reference HTML file: <code style="font-family: 'JetBrains Mono', monospace; font-size: 13px; background: var(--cream); padding: 2px 6px;">first-appointment-pack.html</code> — open in Chrome to see the final visual target.</li>
+      <li>4 Google Fonts to upload (listed on the next page).</li>
+      <li>~3 hours of focused build time. Don't multitask. The mono spacing is finicky.</li>
+    </ul>
+  </div>
+
+  <div class="h3">How to use the page-by-page specs</div>
+  <div class="body">
+    For each of the 13 deck pages, this document gives you: a thumbnail showing the layout, the exact dimensions of every element, the font + size + color for every text block, and the copy itself. Match it to the reference HTML for cross-check. The reference HTML is the source of truth if anything in this doc is ambiguous.
+  </div>
+
+  <div class="callout">
+    <div class="label">The bar</div>
+    <div class="text">"a Canva designer who's never met us should be able to rebuild the whole deck from this doc alone, in one sitting, without asking a single question."</div>
+  </div>
+
+  <div class="page-brand">Builders Collective · Canva Spec</div>
+  <div class="page-num">02 · How to use</div>
+</div>
+
+<!-- ============ PAGE 3 · BRAND KIT ============ -->
+<div class="page">
+  <div class="eyebrow">03 · Canva Brand Kit Setup</div>
+  <div class="title">colors and <span class="italic">fonts.</span></div>
+  <div class="subtitle">First job in Canva: set up the Brand Kit. Once it's done, every text style and shape colour can be picked from the brand panel, which means consistency is automatic and your team can't accidentally use the wrong green.</div>
+
+  <div class="h3">Brand Kit · Colors (paste these hex codes into Canva Brand Kit)</div>
+  <div class="color-grid">
+    <div class="color-card forest">
+      <div>
+        <div class="color-role">Anchor · 60%</div>
+        <div class="color-name">Forest Floor</div>
+      </div>
+      <div>
+        <div class="color-hex">#0F3D20</div>
+        <div class="color-rgb">RGB 15 · 61 · 32</div>
+      </div>
+    </div>
+    <div class="color-card paper">
+      <div>
+        <div class="color-role">Page · 25%</div>
+        <div class="color-name">Paper</div>
+      </div>
+      <div>
+        <div class="color-hex">#F8F6F1</div>
+        <div class="color-rgb">RGB 248 · 246 · 241</div>
+      </div>
+    </div>
+    <div class="color-card stone">
+      <div>
+        <div class="color-role">Ink · 10%</div>
+        <div class="color-name">Stone</div>
+      </div>
+      <div>
+        <div class="color-hex">#1A1A1A</div>
+        <div class="color-rgb">RGB 26 · 26 · 26</div>
+      </div>
+    </div>
+    <div class="color-card spark">
+      <div>
+        <div class="color-role">Spark · 5%</div>
+        <div class="color-name">Fresh Cut</div>
+      </div>
+      <div>
+        <div class="color-hex">#E8FB94</div>
+        <div class="color-rgb">RGB 232 · 251 · 148</div>
+      </div>
+    </div>
+  </div>
+  <div class="body" style="margin-top: 16px; color: var(--stone-soft); font-size: 14px;">Also add two supporting colors as "Document Colours" (not in main brand kit): <code style="font-family: 'JetBrains Mono', monospace; background: var(--cream); padding: 2px 6px;">#08291A</code> (Forest Deep, for darker backgrounds) and <code style="font-family: 'JetBrains Mono', monospace; background: var(--cream); padding: 2px 6px;">#EFEAD8</code> (Cream, for soft section backgrounds).</div>
+
+  <div class="h3">Brand Kit · Fonts (upload to Canva Brand Kit)</div>
+  <div class="font-grid">
+    <div class="font-card">
+      <div class="font-role">Display · The Headline</div>
+      <div class="font-sample" style="font-family: 'Inter Tight', sans-serif; font-weight: 900;">Aa Bb</div>
+      <div class="font-spec"><b>Inter Tight</b> · Black 900<br>Use for: BUILDERS wordmark, page titles, large numbers<br>Tracking: -3.5% (Canva: spacing -35)</div>
+      <a class="font-link" href="https://fonts.google.com/specimen/Inter+Tight">fonts.google.com/specimen/Inter+Tight</a>
+    </div>
+    <div class="font-card">
+      <div class="font-role">Editorial · The Promise</div>
+      <div class="font-sample" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;">aa bb</div>
+      <div class="font-spec"><b>Fraunces</b> · Light Italic 300<br>Use for: "collective", taglines, italic phrases<br>Tracking: -1.5% (Canva: spacing -15)</div>
+      <a class="font-link" href="https://fonts.google.com/specimen/Fraunces">fonts.google.com/specimen/Fraunces</a>
+    </div>
+    <div class="font-card">
+      <div class="font-role">Body · The Explainer</div>
+      <div class="font-sample" style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 36px;">Aa Bb</div>
+      <div class="font-spec"><b>Inter</b> · Regular 400 / Medium 500<br>Use for: paragraphs, captions, scenario descriptions<br>Tracking: default (0)</div>
+      <a class="font-link" href="https://fonts.google.com/specimen/Inter">fonts.google.com/specimen/Inter</a>
+    </div>
+    <div class="font-card">
+      <div class="font-role">Mono · The Numbers</div>
+      <div class="font-sample" style="font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 32px;">Aa 01</div>
+      <div class="font-spec"><b>JetBrains Mono</b> · Regular 400<br>Use for: prices, suburb codes, FHOG, page numbers, spec strips, all caps<br>Tracking: +18% on caps (Canva: spacing +180)</div>
+      <a class="font-link" href="https://fonts.google.com/specimen/JetBrains+Mono">fonts.google.com/specimen/JetBrains+Mono</a>
+    </div>
+  </div>
+
+  <div class="instruction">
+    <div class="label">Setup steps in Canva</div>
+    <ol class="instruction-steps">
+      <li>Go to <code>Canva</code> → <code>Brand</code> → <code>Brand Kits</code> → <code>Create new</code> → name it "Builders Collective".</li>
+      <li>Download all 4 font families from the Google Fonts links above. Get the full family ZIP (not just one weight).</li>
+      <li>In your Brand Kit, click <code>Brand Fonts</code> → <code>Upload a font</code> → upload each family. Set roles: Inter Tight = Heading, Fraunces = Subheading, Inter = Body.</li>
+      <li>Click <code>Brand Colors</code> → add the 4 hex codes above with their names (Forest Floor, Paper, Stone, Fresh Cut).</li>
+      <li>Go to <code>Logos</code> → for now skip this. We type the wordmark live with brand fonts so it stays editable.</li>
+    </ol>
+  </div>
+
+  <div class="page-brand">Builders Collective · Canva Spec</div>
+  <div class="page-num">03 · Brand Kit</div>
+</div>
+
+<!-- ============ PAGE 4 · DOC SETTINGS + RECURRING ELEMENTS ============ -->
+<div class="page">
+  <div class="eyebrow">04 · Document settings &amp; recurring elements</div>
+  <div class="title">five reusable <span class="italic">parts.</span></div>
+  <div class="subtitle">Every deck page is built from the same five pieces. Set them up once as elements you can copy/paste across pages.</div>
+
+  <div class="h3">Document settings</div>
+  <div class="body">
+    <ul class="apex-bullets">
+      <li><b>Page size:</b> A4 portrait, 210 × 297 mm (or custom 1240 × 1754 px at 150dpi).</li>
+      <li><b>Default margin:</b> 80 px outside on all interior pages. 56 px on cover and contact pages.</li>
+      <li><b>13 pages total</b> in one Canva document. Order matters, set up cover (page 01) and contact (page 13) first so the deck reads as a complete pack.</li>
+    </ul>
+  </div>
+
+  <div class="h3">The five recurring elements</div>
+
+  <div class="element-card">
+    <div class="element-demo" style="background: var(--forest);">
+      <div class="demo-apex-lg"></div>
+    </div>
+    <div>
+      <div class="element-name">01 · The Apex (roof / triangle mark)</div>
+      <div class="element-spec">Canva element: Triangle shape · Color: Fresh Cut #E8FB94<br>Aspect ratio: 2:1 (twice as wide as tall)<br>Sizes: Small 32×16, Medium 56×28, Large 96×48, XL 160×80</div>
+      <div class="element-note">The signature mark of the brand. Use Canva's built-in equilateral triangle, scale to the right aspect ratio. Appears at top-left of most pages (small to medium) and as the hero element on the cover (XL).</div>
+    </div>
+  </div>
+
+  <div class="element-card">
+    <div class="element-demo" style="background: var(--forest); flex-direction: column; align-items: flex-start; padding: 24px;">
+      <div class="demo-apex-md"></div>
+      <div style="font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 48px; letter-spacing: -0.035em; color: var(--paper); line-height: 0.82; margin-top: 12px;">BUILDERS</div>
+      <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 32px; color: var(--paper); line-height: 1; letter-spacing: -0.02em;">collective</div>
+    </div>
+    <div>
+      <div class="element-name">02 · The Wordmark (logo lockup)</div>
+      <div class="element-spec">Apex → BUILDERS (Inter Tight Black) → collective (Fraunces Italic Light)<br>Aligned left, no centering<br>"collective" sits 4px below baseline of BUILDERS</div>
+      <div class="element-note">Don't outsource as an image. Type it live in Canva using the brand fonts so the layout stays adjustable. Three sizes: small (header), medium (footer), XL (cover only).</div>
+    </div>
+  </div>
+
+  <div class="element-card">
+    <div class="element-demo">
+      <div class="spec-strip-demo" style="font-size: 11px;">JOB · BYFORD · 4 BED · 12-MO BUILD · 2026</div>
+    </div>
+    <div>
+      <div class="element-name">03 · The Spec Strip (mono ticker)</div>
+      <div class="element-spec">Font: JetBrains Mono Regular · 12px · uppercase · +18% tracking<br>Color: Forest Floor on Paper, or Fresh Cut on Forest<br>Border: 1px Forest Floor top + bottom, 12px vertical padding</div>
+      <div class="element-note">The brand's signature pattern. Used as page footers, under data tables, under hero images. Always uppercase. Always with dot separators (·) between items. Never with bullet points (•).</div>
+    </div>
+  </div>
+
+  <div class="element-card">
+    <div class="element-demo" style="gap: 8px;">
+      <div class="stage-tag-demo active"><span style="font-weight: 700;">01</span> Finance</div>
+      <div class="stage-tag-demo"><span style="font-weight: 700;">02</span> Land</div>
+      <div class="stage-tag-demo"><span style="font-weight: 700;">03</span> Build</div>
+    </div>
+    <div>
+      <div class="element-name">04 · The Stage Tags</div>
+      <div class="element-spec">Pill shape · radius 100px · border 1px Forest Floor<br>Padding 8 vertical, 16 horizontal · Font: JetBrains Mono 11px uppercase<br>Active state: background Fresh Cut, no border</div>
+      <div class="element-note">Used on pages 02, 07, and any progress check-in. Always in the order Finance → Land → Build, never reordered. Filled tag = where the client is now.</div>
+    </div>
+  </div>
+
+  <div class="element-card">
+    <div class="element-demo" style="flex-direction: column; align-items: flex-start; padding: 20px;">
+      <ul class="apex-bullets" style="font-size: 13px;">
+        <li>Fixed broker fee paid by builder.</li>
+        <li>4 builders compared side by side.</li>
+        <li>One point of contact throughout.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="element-name">05 · Apex Bullets</div>
+      <div class="element-spec">Triangle bullet (12×8px) Forest Floor · 14px gap between bullet and text<br>Font: Inter Regular 14-17px · line-height 1.5<br>8-11px vertical padding between items</div>
+      <div class="element-note">Replaces disc bullets across all body copy. Use Canva's text alignment + custom bullet feature, or position triangle shape manually inline. Never mix with disc bullets on the same page.</div>
+    </div>
+  </div>
+
+  <div class="page-brand">Builders Collective · Canva Spec</div>
+  <div class="page-num">04 · Settings &amp; Elements</div>
+</div>
+
+<!-- ============ PAGE 5 · PAGE-BY-PAGE REFERENCE ============ -->
+<div class="page">
+  <div class="eyebrow">05 · Page-by-page reference</div>
+  <div class="title">all 13 pages <span class="italic">at a glance.</span></div>
+  <div class="subtitle">High-level reference. For exact layouts, open <code style="font-family: 'JetBrains Mono', monospace; background: var(--cream); padding: 2px 6px;">first-appointment-pack.html</code> in Chrome and match what you see on screen. Below: what each page is for, the dominant background colour, and what's editable per client.</div>
+
+  <div class="ref-grid" style="margin-top: 24px;">
+    <div class="ref-card forest">
+      <div>
+        <div class="ref-num">01</div>
+        <div class="ref-title">Cover</div>
+        <div class="ref-tag" style="color: rgba(248,246,241,0.7);">Forest · Hero</div>
+      </div>
+      <div class="ref-note" style="color: rgba(248,246,241,0.85);">Oversized wordmark + tagline. Edit per client: <b>client name</b> (top right meta strip).</div>
+    </div>
+    <div class="ref-card">
+      <div>
+        <div class="ref-num">02</div>
+        <div class="ref-title">Welcome</div>
+        <div class="ref-tag">Paper · Intro</div>
+      </div>
+      <div class="ref-note">"Your shortlist of Perth builders" + brand promise. No per-client edits.</div>
+    </div>
+    <div class="ref-card cream">
+      <div>
+        <div class="ref-num">03</div>
+        <div class="ref-title">Buyer Scenarios</div>
+        <div class="ref-tag">Mixed · 4 tiles</div>
+      </div>
+      <div class="ref-note">4 scenario cards. Edit per client: highlight <b>the one that fits this client</b> (move chartreuse fill to their tile).</div>
+    </div>
+    <div class="ref-card">
+      <div>
+        <div class="ref-num">04</div>
+        <div class="ref-title">Finance</div>
+        <div class="ref-tag">Paper + Forest strip</div>
+      </div>
+      <div class="ref-note">4-number strip (FHOG / 48hrs / 5% / $0). Edit annually: FHOG amount.</div>
+    </div>
+    <div class="ref-card">
+      <div>
+        <div class="ref-num">05</div>
+        <div class="ref-title">5 Myths Busted</div>
+        <div class="ref-tag">Paper · List</div>
+      </div>
+      <div class="ref-note">5 myths with $$$ savings called out. No per-client edits.</div>
+    </div>
+    <div class="ref-card forest">
+      <div>
+        <div class="ref-num">06</div>
+        <div class="ref-title">Your Side</div>
+        <div class="ref-tag" style="color: rgba(248,246,241,0.7);">Forest · Model</div>
+      </div>
+      <div class="ref-note" style="color: rgba(248,246,241,0.85);">Broker model + 60+ / 40+ / 100s stats. No per-client edits.</div>
+    </div>
+    <div class="ref-card cream">
+      <div>
+        <div class="ref-num">07</div>
+        <div class="ref-title">3 Steps</div>
+        <div class="ref-tag">Mixed · Steps</div>
+      </div>
+      <div class="ref-note">Finance / Land / Build cards. Edit per client: <b>which step is active</b> (chartreuse fill moves).</div>
+    </div>
+    <div class="ref-card">
+      <div>
+        <div class="ref-num">08</div>
+        <div class="ref-title">Building Journey</div>
+        <div class="ref-tag">Mixed · Timeline</div>
+      </div>
+      <div class="ref-note">14-step Admin + Construction flow. Static, no per-client edits.</div>
+    </div>
+    <div class="ref-card forest">
+      <div>
+        <div class="ref-num">09</div>
+        <div class="ref-title">Suburbs by Price</div>
+        <div class="ref-tag" style="color: rgba(248,246,241,0.7);">Forest Deep · Tiers</div>
+      </div>
+      <div class="ref-note" style="color: rgba(248,246,241,0.85);">3 price tiers, real Perth suburbs. Edit quarterly: <b>refresh REIWA median prices</b>.</div>
+    </div>
+    <div class="ref-card">
+      <div>
+        <div class="ref-num">10</div>
+        <div class="ref-title">House &amp; Land</div>
+        <div class="ref-tag">Paper · Table</div>
+      </div>
+      <div class="ref-note">5-line cost table. Edit per client: <b>fill in real $ amounts</b> during meeting.</div>
+    </div>
+    <div class="ref-card spark">
+      <div>
+        <div class="ref-num">11</div>
+        <div class="ref-title">The Shortlist</div>
+        <div class="ref-tag">Mixed · Hero deliverable</div>
+      </div>
+      <div class="ref-note">4-builder comparison + savings stamp. Edit per client: <b>builder names, prices, savings, suburb, build months</b>.</div>
+    </div>
+    <div class="ref-card cream">
+      <div>
+        <div class="ref-num">12</div>
+        <div class="ref-title">Next Step</div>
+        <div class="ref-tag">Paper · 3 cards</div>
+      </div>
+      <div class="ref-note">3-week roadmap (Finance / Land / Build shortlists). No per-client edits.</div>
+    </div>
+    <div class="ref-card forest">
+      <div>
+        <div class="ref-num">13</div>
+        <div class="ref-title">Contact</div>
+        <div class="ref-tag" style="color: rgba(248,246,241,0.7);">Forest · Close</div>
+      </div>
+      <div class="ref-note" style="color: rgba(248,246,241,0.85);">"Any questions?" + contact card. Edit per client: <b>broker's name</b> on contact card.</div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 32px;">
+    <div class="label">Builder's note</div>
+    <div class="text">"open the reference HTML on a second monitor. zoom your canva window to fit one page. paste content from the html as you go. don't try to read the layout from a printed PDF, it's harder than it needs to be."</div>
+  </div>
+
+  <div class="page-brand">Builders Collective · Canva Spec</div>
+  <div class="page-num">05 · Page Reference</div>
+</div>
+
+<!-- ============ PAGE 6 · VARIABLE FIELDS ============ -->
+<div class="page">
+  <div class="eyebrow">06 · Variable fields · what changes per client</div>
+  <div class="title">12 fields the team <span class="italic">edits.</span></div>
+  <div class="subtitle">Once the Canva template is built, your team duplicates it per new client and changes these specific fields. Nothing else should ever be touched. This list is the single source of truth for "what's editable" — print it, stick it on the wall.</div>
+
+  <table class="var-table">
+    <thead>
+      <tr>
+        <th style="width: 90px;">Page</th>
+        <th style="width: 200px;">Field</th>
+        <th>What to change</th>
+        <th>Current template value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="page-col">01 Cover</td>
+        <td class="field-name">{{client_name}}</td>
+        <td>Add client name to top meta strip (optional). If skipping, leave as "First Appointment Pack".</td>
+        <td class="current">First Appointment Pack · 2026 · Perth WA</td>
+      </tr>
+      <tr>
+        <td class="page-col">03 Scenarios</td>
+        <td class="field-name">{{scenario_active}}</td>
+        <td>Move the chartreuse fill to the buyer scenario tile that matches this client. Other 3 tiles return to default (cream / forest / outline).</td>
+        <td class="current">Tile 02 (Escape rent trap) is highlighted</td>
+      </tr>
+      <tr>
+        <td class="page-col">04 Finance</td>
+        <td class="field-name">{{fhog_amount}}</td>
+        <td>Update FHOG amount if WA grant changes. Check annually with WA Treasury.</td>
+        <td class="current">$10K</td>
+      </tr>
+      <tr>
+        <td class="page-col">07 3 Steps</td>
+        <td class="field-name">{{active_step}}</td>
+        <td>Highlight whichever of Finance / Land / Build is the client's current stage. Move chartreuse fill + bottom stage tag.</td>
+        <td class="current">Step 01 Finance is active</td>
+      </tr>
+      <tr>
+        <td class="page-col">09 Suburbs</td>
+        <td class="field-name">{{suburb_prices}}</td>
+        <td>Refresh REIWA median prices quarterly. Source: reiwa.com.au/news/median-prices.</td>
+        <td class="current">March 2026 REIWA medians</td>
+      </tr>
+      <tr>
+        <td class="page-col">10 H&amp;L</td>
+        <td class="field-name">{{cost_land}}</td>
+        <td>Fill in real land cost during meeting.</td>
+        <td class="current">$xxx,xxx (placeholder)</td>
+      </tr>
+      <tr>
+        <td class="page-col">10 H&amp;L</td>
+        <td class="field-name">{{cost_siteworks}}</td>
+        <td>Fill in siteworks cost.</td>
+        <td class="current">$xxx,xxx (placeholder)</td>
+      </tr>
+      <tr>
+        <td class="page-col">10 H&amp;L</td>
+        <td class="field-name">{{cost_house}} {{cost_variations}} {{cost_ppa}} {{cost_total}}</td>
+        <td>Fill in house, variations, PPA fee, total. All 5 lines + total.</td>
+        <td class="current">$xxx,xxx (placeholders)</td>
+      </tr>
+      <tr>
+        <td class="page-col">11 Shortlist</td>
+        <td class="field-name">{{stamp_saving}}</td>
+        <td>Update savings stamp with the actual wholesale saving on this client's build.</td>
+        <td class="current">$36,300 saving (Byford · 4 BED)</td>
+      </tr>
+      <tr>
+        <td class="page-col">11 Shortlist</td>
+        <td class="field-name">{{stamp_suburb_brief}}</td>
+        <td>Update stamp footer with suburb + bedroom count.</td>
+        <td class="current">Byford · 4 BED</td>
+      </tr>
+      <tr>
+        <td class="page-col">11 Shortlist</td>
+        <td class="field-name">{{shortlist_table}}</td>
+        <td>Update all 4 builder rows: builder name (or "Builder 01-04" if anonymising), base price, wholesale price, savings, build months. Highlight the recommended row with chartreuse fill.</td>
+        <td class="current">4 placeholder builders, Builder 02 highlighted</td>
+      </tr>
+      <tr>
+        <td class="page-col">13 Contact</td>
+        <td class="field-name">{{broker_name}}</td>
+        <td>Optional: replace contact card with the assigned broker's name + direct line.</td>
+        <td class="current">Generic team contact details</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="dont-do">
+    <div class="label">Don't touch</div>
+    <ul>
+      <li>Brand colors. Ever. If you "tweak" green to chartreuse, the whole system breaks.</li>
+      <li>Font sizes or weights. Pick a brand font from the kit, not Canva's defaults.</li>
+      <li>Page order. The pack reads cover → welcome → scenarios → ... → contact. Reordering breaks the narrative.</li>
+      <li>The apex triangle proportion. Always 2:1 (twice as wide as tall). Stretching it sideways looks bad immediately.</li>
+      <li>Stock photos. The brand has zero photography. If you add a stock photo, you've broken the system.</li>
+    </ul>
+  </div>
+
+  <div class="page-brand">Builders Collective · Canva Spec</div>
+  <div class="page-num">06 · Variable Fields</div>
+</div>
+
+<!-- ============ PAGE 7 · EDIT WORKFLOW + EXPORT ============ -->
+<div class="page">
+  <div class="eyebrow">07 · Per-client edit workflow &amp; export</div>
+  <div class="title">how your team <span class="italic">uses it.</span></div>
+  <div class="subtitle">Once the master template is built, this is the standard operating procedure your team follows for every new client appointment.</div>
+
+  <div class="h3">Per-client workflow (10 minutes per client)</div>
+  <div class="instruction">
+    <div class="label">For every new client appointment</div>
+    <ol class="instruction-steps">
+      <li><b>Duplicate the master.</b> In Canva, open "Builders Collective · First Appointment Pack · MASTER", click the three-dot menu, "Make a copy". Rename to client surname + date, e.g. <code>Smith · 2026-05-21</code>.</li>
+      <li><b>Open the variable fields list</b> (previous page of this spec). Print it or pin it next to your screen.</li>
+      <li><b>Edit only those fields.</b> Don't touch anything else. If a field doesn't apply to this client (e.g. you don't know their cost numbers yet), leave the placeholder.</li>
+      <li><b>Page 03:</b> match the scenario tile to the client's situation by moving the chartreuse fill.</li>
+      <li><b>Page 07:</b> set the active step (Finance / Land / Build) based on where the client is.</li>
+      <li><b>Page 11:</b> if you've already prepared the shortlist, update the table with the four builder quotes. If not, leave placeholders and tell the client this is what the page will look like at appointment two.</li>
+      <li><b>Page 13:</b> swap in the assigned broker's contact details if it's a single-broker assignment.</li>
+      <li><b>Quality check:</b> click through all 13 pages in Canva's preview. Look for placeholder $xxx,xxx still visible (means you missed a field). Check spelling.</li>
+      <li><b>Export.</b> Top right → Share → Download → File type <b>PDF Print</b> → Quality <b>Print</b> → Check "Crop marks and bleed" only if printing physically → Download.</li>
+      <li><b>Send.</b> Email to client with subject line "Your Shortlist of Perth Builders · [Client Surname]".</li>
+    </ol>
+  </div>
+
+  <div class="h3">Quarterly maintenance</div>
+  <div class="body">
+    <ul class="apex-bullets">
+      <li><b>Page 09 Suburbs:</b> refresh REIWA median prices each quarter (Mar / Jun / Sep / Dec). Update the date stamp at the bottom.</li>
+      <li><b>Page 04 Finance:</b> verify FHOG amount and low-deposit programs are still current (WA Treasury announcements).</li>
+      <li><b>Page 06 Stats:</b> revisit "60+ suburbs" / "40+ years" / "100s of designs" annually — bump up if your panel has grown.</li>
+    </ul>
+  </div>
+
+  <div class="h3">Export settings for client-ready PDFs</div>
+  <div class="body">
+    <ul class="apex-bullets">
+      <li>File type: <b>PDF Print</b> (not PDF Standard — Print embeds fonts and outputs at higher resolution).</li>
+      <li>Color profile: <b>CMYK</b> if printing physically, <b>RGB</b> if emailing digitally.</li>
+      <li>Crop marks: only for physical print runs.</li>
+      <li>Flatten: <b>off</b> (keeps text searchable in the PDF).</li>
+      <li>Filename convention: <code>BC-Appointment-[Surname]-YYYYMMDD.pdf</code>, e.g. <code>BC-Appointment-Smith-20260521.pdf</code>.</li>
+    </ul>
+  </div>
+
+  <div class="callout" style="margin-top: 32px;">
+    <div class="label">The whole point</div>
+    <div class="text">"every client walks out with a pack that names their suburb, their builders, their savings number. it's not a brochure. it's their shortlist."</div>
+    <div class="body">That's the brand promise. If the deck doesn't say their suburb, their numbers, their builders by name, your team hasn't done their job. The template makes that easy. Now the system has to enforce it.</div>
+  </div>
+
+  <div class="page-brand">Builders Collective · Canva Spec</div>
+  <div class="page-num">07 · Workflow</div>
+</div>
+
+</body>
+</html>
