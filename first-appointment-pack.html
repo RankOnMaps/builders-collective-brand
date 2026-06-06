@@ -171,10 +171,10 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--stone); -
 
 /* ============ PAGE 10 · REIWA MAP (NEW) ============ */
 .p10 { background: var(--paper); }
-.p10-top { padding: 72px 80px 32px; }
-.p10-map-wrap { padding: 0 80px 32px; display: flex; justify-content: center; }
-.p10-map-wrap img { width: 100%; max-width: 880px; height: auto; display: block; box-shadow: 0 8px 32px rgba(0,0,0,0.08); border: 1px solid var(--rule); }
-.p10-source { padding: 0 80px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.15em; color: rgba(38,38,38,0.5); text-transform: uppercase; text-align: center; }
+.p10-top { padding: 56px 56px 24px; }
+.p10-map-wrap { padding: 0 40px 24px; display: flex; justify-content: center; }
+.p10-map-wrap img { width: 100%; max-width: 1160px; height: auto; display: block; box-shadow: 0 8px 32px rgba(0,0,0,0.08); border: 1px solid var(--rule); image-rendering: -webkit-optimize-contrast; }
+.p10-source { padding: 0 56px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.15em; color: rgba(38,38,38,0.5); text-transform: uppercase; text-align: center; }
 
 /* ============ PAGE 11 · HOUSE AND LAND ============ */
 .p11 { background: var(--paper); }
@@ -240,10 +240,12 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--stone); -
 .contact-value { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 21px; color: var(--stone); margin-top: 6px; letter-spacing: -0.01em; }
 
 /* print */
+@page { size: 1240px 1754px; margin: 0; }
 @media print {
   html, body { background: white; padding: 0; margin: 0; }
   body { padding: 0; }
-  .page { margin: 0; box-shadow: none; page-break-after: always; }
+  .page { margin: 0; box-shadow: none; page-break-after: always; break-after: page; }
+  .page:last-child { page-break-after: auto; break-after: auto; }
 }
 </style>
 </head>
@@ -644,9 +646,13 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--stone); -
 <!-- ============ PAGE 10 · REIWA MAP (NEW) ============ -->
 <div class="page p10">
   <div class="p10-top">
-    <div class="eyebrow">Page 10 · The Full Map</div>
-    <div class="title-display" style="font-size: 78px; color: var(--forest); margin-top: 14px;">perth median<br><span class="title-italic" style="font-size: 78px;">house prices.</span></div>
-    <div class="body-text" style="margin-top: 18px; max-width: 880px; color: var(--stone-soft); font-size: 18px;">Every suburb, every price band, on one page. Pick a colour to match your finance and we'll point at the postcodes that build inside it.</div>
+    <div style="display: flex; justify-content: space-between; align-items: end; gap: 32px;">
+      <div>
+        <div class="eyebrow">Page 10 · The Full Map</div>
+        <div class="title-display" style="font-size: 56px; color: var(--forest); margin-top: 10px;">perth median <span class="title-italic" style="font-size: 56px;">house prices.</span></div>
+      </div>
+      <div class="body-text" style="color: var(--stone-soft); font-size: 15px; max-width: 360px; text-align: right;">Every suburb, every band, on one page. Match a colour to your finance and we'll point at the postcodes that build inside it.</div>
+    </div>
   </div>
   <div class="p10-map-wrap">
     <img src="assets/reiwa-perth-map.png" alt="REIWA Perth House Prices March 2026">
