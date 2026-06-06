@@ -169,12 +169,12 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--stone); -
 .tier-suburbs b { font-weight: 700; }
 .p9-source { padding: 24px 80px 0; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.15em; color: rgba(248,248,248,0.5); text-transform: uppercase; }
 
-/* ============ PAGE 10 · REIWA MAP (NEW) ============ */
-.p10 { background: var(--paper); }
-.p10-top { padding: 56px 56px 24px; }
-.p10-map-wrap { padding: 0 40px 24px; display: flex; justify-content: center; }
-.p10-map-wrap img { width: 100%; max-width: 1160px; height: auto; display: block; box-shadow: 0 8px 32px rgba(0,0,0,0.08); border: 1px solid var(--rule); image-rendering: -webkit-optimize-contrast; }
-.p10-source { padding: 0 56px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.15em; color: rgba(38,38,38,0.5); text-transform: uppercase; text-align: center; }
+/* ============ PAGES 10–11 · REIWA MAP (split) ============ */
+.p10, .p11map { background: var(--paper); }
+.p10-top, .p11map-top { padding: 48px 56px 18px; }
+.p10-map-wrap, .p11map-map-wrap { padding: 0 32px 16px; display: flex; justify-content: center; }
+.p10-map-wrap img, .p11map-map-wrap img { width: 100%; max-width: 1176px; height: auto; display: block; box-shadow: 0 8px 32px rgba(0,0,0,0.08); border: 1px solid var(--rule); image-rendering: -webkit-optimize-contrast; }
+.p10-source, .p11map-source { padding: 0 56px; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.15em; color: rgba(38,38,38,0.5); text-transform: uppercase; text-align: center; }
 
 /* ============ PAGE 11 · HOUSE AND LAND ============ */
 .p11 { background: var(--paper); }
@@ -643,29 +643,48 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--stone); -
   <div class="page-num">09 · Suburbs</div>
 </div>
 
-<!-- ============ PAGE 10 · REIWA MAP (NEW) ============ -->
+<!-- ============ PAGE 10 · REIWA MAP NORTH ============ -->
 <div class="page p10">
   <div class="p10-top">
     <div style="display: flex; justify-content: space-between; align-items: end; gap: 32px;">
       <div>
-        <div class="eyebrow">Page 10 · The Full Map</div>
-        <div class="title-display" style="font-size: 56px; color: var(--forest); margin-top: 10px;">perth median <span class="title-italic" style="font-size: 56px;">house prices.</span></div>
+        <div class="eyebrow">Page 10 · Perth · North</div>
+        <div class="title-display" style="font-size: 52px; color: var(--forest); margin-top: 8px;">north perth <span class="title-italic" style="font-size: 52px;">by price.</span></div>
       </div>
-      <div class="body-text" style="color: var(--stone-soft); font-size: 15px; max-width: 360px; text-align: right;">Every suburb, every band, on one page. Match a colour to your finance and we'll point at the postcodes that build inside it.</div>
+      <div class="body-text" style="color: var(--stone-soft); font-size: 14px; max-width: 360px; text-align: right;">Yanchep down through Joondalup, Wanneroo, Stirling, the CBD belt. Match a colour to your finance band.</div>
     </div>
   </div>
   <div class="p10-map-wrap">
-    <img src="assets/reiwa-perth-map.png" alt="REIWA Perth House Prices March 2026">
+    <img src="assets/reiwa-north.png" alt="REIWA Perth House Prices March 2026 · North">
   </div>
-  <div class="p10-source">Source · REIWA · 12 months to March 2026 · median established house sales</div>
-  <div class="page-brand">Builders Collective · REIWA Map</div>
-  <div class="page-num">10 · Map</div>
+  <div class="p10-source">Source · REIWA · 12 months to March 2026 · median established house sales · north half</div>
+  <div class="page-brand">Builders Collective · REIWA · North</div>
+  <div class="page-num">10 · North</div>
+</div>
+
+<!-- ============ PAGE 11 · REIWA MAP SOUTH ============ -->
+<div class="page p11map">
+  <div class="p11map-top">
+    <div style="display: flex; justify-content: space-between; align-items: end; gap: 32px;">
+      <div>
+        <div class="eyebrow">Page 11 · Perth · South</div>
+        <div class="title-display" style="font-size: 52px; color: var(--forest); margin-top: 8px;">south perth <span class="title-italic" style="font-size: 52px;">by price.</span></div>
+      </div>
+      <div class="body-text" style="color: var(--stone-soft); font-size: 14px; max-width: 360px; text-align: right;">Fremantle through Cockburn, Rockingham, Armadale, Byford, plus the Warnbro to Singleton corridor inset.</div>
+    </div>
+  </div>
+  <div class="p11map-map-wrap">
+    <img src="assets/reiwa-south.png" alt="REIWA Perth House Prices March 2026 · South">
+  </div>
+  <div class="p11map-source">Source · REIWA · 12 months to March 2026 · median established house sales · south half</div>
+  <div class="page-brand">Builders Collective · REIWA · South</div>
+  <div class="page-num">11 · South</div>
 </div>
 
 <!-- ============ PAGE 11 · HOUSE AND LAND ============ -->
 <div class="page p11">
   <div class="p11-top">
-    <div class="eyebrow">Page 11 · The Costs</div>
+    <div class="eyebrow">Page 12 · The Costs</div>
     <div class="title-display" style="font-size: 92px; color: var(--forest); margin-top: 18px;">the five<br>real <span class="title-italic" style="font-size: 92px;">costs.</span></div>
   </div>
   <div class="p11-grid">
@@ -711,13 +730,13 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--stone); -
     </div>
   </div>
   <div class="page-brand">Builders Collective · Costs</div>
-  <div class="page-num">11 · House and Land</div>
+  <div class="page-num">12 · House and Land</div>
 </div>
 
 <!-- ============ PAGE 12 · THE SHORTLIST ============ -->
 <div class="page p12">
   <div class="p12-top">
-    <div class="eyebrow">Page 12 · The Deliverable</div>
+    <div class="eyebrow">Page 13 · The Deliverable</div>
     <div class="title-display" style="font-size: 92px; color: var(--forest); margin-top: 18px;">your <span class="title-italic" style="font-size: 92px;">shortlist.</span></div>
     <div class="body-text" style="margin-top: 22px; max-width: 780px; color: var(--stone-soft);">Same brief. Same budget. Same suburb. Four builders quoting against each other. You see all of it.</div>
   </div>
@@ -771,13 +790,13 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--stone); -
   </div>
   <div class="p12-foot">"the chartreuse row is our pick for your brief. you might pick differently. that's the whole point."</div>
   <div class="page-brand">Builders Collective · Shortlist</div>
-  <div class="page-num">12 · Shortlist</div>
+  <div class="page-num">13 · Shortlist</div>
 </div>
 
 <!-- ============ PAGE 13 · NEXT STEP ============ -->
 <div class="page p13">
   <div class="p13-top">
-    <div class="eyebrow">Page 13 · From Here</div>
+    <div class="eyebrow">Page 14 · From Here</div>
     <div class="title-display" style="font-size: 92px; color: var(--forest); margin-top: 18px;">your next <span class="title-italic" style="font-size: 92px;">move.</span></div>
   </div>
   <div class="p13-content">
@@ -816,7 +835,7 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--stone); -
     </div>
   </div>
   <div class="page-brand">Builders Collective · Next Step</div>
-  <div class="page-num">13 · Next Step</div>
+  <div class="page-num">14 · Next Step</div>
 </div>
 
 <!-- ============ PAGE 14 · CONTACT ============ -->
@@ -827,7 +846,7 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--stone); -
       <div style="width: 200px;">
         <img src="assets/bc-logo-white-full.png" alt="Builders Collective" style="width: 100%; height: auto; display: block;">
       </div>
-      <div class="eyebrow light">End of pack · Page 14</div>
+      <div class="eyebrow light">End of pack · Page 15</div>
     </div>
   </div>
   <div class="p14-title">
@@ -854,7 +873,7 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--stone); -
     </div>
   </div>
   <div class="page-brand">Builders Collective · The Building Broker</div>
-  <div class="page-num">14 · Contact</div>
+  <div class="page-num">15 · Contact</div>
 </div>
 
 </body>
