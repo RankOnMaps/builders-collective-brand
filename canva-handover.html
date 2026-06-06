@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Builders Collective · Canva Edit Handover</title>
+<meta name="description" content="How to import the first appointment pack into Canva so anyone on the BC team can edit it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;900&family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@1,9..144,200;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sage: #1F4D3C;
+  --sage-deep: #0F3024;
+  --paper: #F5F2EA;
+  --cream: #EAE4D4;
+  --ink: #0F0F0F;
+  --ink-soft: #4A4A4A;
+  --rule: rgba(15,15,15,0.12);
+  --rule-light: rgba(245,242,234,0.16);
+  --bc-forest: #062A15;
+  --bc-spark: #EAFD98;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { font-family: 'Inter', -apple-system, sans-serif; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(15,15,15,0.55); }
+.eyebrow.light { color: rgba(245,242,234,0.65); }
+
+.topbar { background: var(--sage-deep); color: var(--paper); padding: 14px 32px; }
+.topbar-inner { max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,242,234,0.7); flex-wrap: wrap; gap: 8px; }
+.topbar-rom { display: flex; align-items: center; gap: 10px; color: var(--paper); }
+.rom-dot { width: 7px; height: 7px; background: var(--paper); border-radius: 50%; }
+.topbar-back { color: rgba(245,242,234,0.7); }
+.topbar-back:hover { color: var(--paper); }
+
+.hero { background: var(--sage); color: var(--paper); padding: 80px 32px 88px; position: relative; overflow: hidden; }
+.hero-grid { background-image: linear-gradient(to right, rgba(245,242,234,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(245,242,234,0.04) 1px, transparent 1px); background-size: 48px 48px; position: absolute; inset: 0; pointer-events: none; }
+.hero-inner { position: relative; max-width: 1240px; margin: 0 auto; }
+.hero-meta { display: flex; justify-content: space-between; padding-bottom: 24px; border-bottom: 1px solid var(--rule-light); flex-wrap: wrap; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,242,234,0.65); }
+.hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(245,242,234,0.7); display: flex; align-items: center; gap: 12px; margin-top: 56px; }
+.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: rgba(245,242,234,0.55); }
+.hero-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: clamp(48px, 7vw, 84px); letter-spacing: -0.03em; line-height: 0.95; margin-top: 24px; }
+.hero-title .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; }
+.hero-sub { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.4; margin-top: 28px; color: rgba(245,242,234,0.9); max-width: 720px; letter-spacing: -0.005em; }
+
+section { padding: 88px 32px; max-width: 1240px; margin: 0 auto; }
+.section-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(15,15,15,0.55); display: flex; align-items: center; gap: 12px; }
+.section-num::before { content: ''; width: 28px; height: 1px; background: rgba(15,15,15,0.45); }
+.section-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: clamp(36px, 5vw, 56px); letter-spacing: -0.025em; line-height: 1; margin-top: 18px; margin-bottom: 24px; }
+.section-title .italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; color: var(--sage); }
+.section-sub { font-family: 'Inter', sans-serif; font-size: 18px; line-height: 1.55; color: var(--ink-soft); max-width: 780px; margin-bottom: 48px; }
+
+.steps { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.step { background: var(--paper); border: 1px solid var(--rule); padding: 40px; position: relative; }
+.step-num { font-family: 'Inter Tight', sans-serif; font-weight: 900; font-size: 72px; color: var(--sage); letter-spacing: -0.04em; line-height: 0.85; }
+.step-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); margin-top: 20px; }
+.step-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -0.02em; margin-top: 10px; line-height: 1.15; }
+.step-body { font-family: 'Inter', sans-serif; font-size: 15px; color: var(--ink-soft); line-height: 1.55; margin-top: 14px; }
+.step-action { display: inline-block; margin-top: 22px; padding: 14px 22px; background: var(--sage); color: var(--paper); font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; }
+.step-action:hover { background: var(--sage-deep); }
+.step-receipt { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--rule); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(15,15,15,0.55); }
+
+.brand-section { background: var(--cream); max-width: none; }
+.brand-inner { max-width: 1240px; margin: 0 auto; padding: 88px 32px; }
+.brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; }
+.brand-card { background: var(--paper); border: 1px solid var(--rule); padding: 36px; }
+.brand-card-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); margin-bottom: 18px; }
+.color-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.color-tile { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--rule); }
+.color-swatch { width: 36px; height: 36px; border-radius: 6px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.06); }
+.color-name { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 14px; }
+.color-hex { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+.font-list { display: flex; flex-direction: column; gap: 18px; }
+.font-row { padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.font-row:last-child { border-bottom: none; }
+.font-name { font-family: 'DM Sans', sans-serif; font-weight: 900; font-size: 32px; letter-spacing: -0.025em; line-height: 1; }
+.font-name.italic { font-family: 'DM Sans', sans-serif; font-style: italic; font-weight: 300; }
+.font-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-top: 8px; }
+.font-link { display: inline-block; margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); border-bottom: 1px solid var(--sage); padding-bottom: 2px; }
+
+.logo-section { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.logo-card { padding: 24px; text-align: center; }
+.logo-card.dark { background: var(--bc-forest); color: var(--paper); }
+.logo-card.light { background: var(--paper); border: 1px solid var(--rule); }
+.logo-card img { width: 70%; max-width: 200px; height: auto; display: block; margin: 0 auto 14px; }
+.logo-card-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7; }
+.logo-download { display: block; margin-top: 14px; padding: 12px; background: var(--sage); color: var(--paper); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; text-align: center; }
+
+.variable-section { padding: 88px 32px; max-width: 1240px; margin: 0 auto; }
+.variable-table { width: 100%; border-collapse: collapse; margin-top: 32px; border: 1px solid var(--rule); }
+.variable-table th { background: var(--sage); color: var(--paper); padding: 18px 22px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-align: left; font-weight: 500; }
+.variable-table td { padding: 18px 22px; border-top: 1px solid var(--rule); font-family: 'Inter', sans-serif; font-size: 15px; vertical-align: top; }
+.variable-table td.page { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: var(--ink-soft); width: 100px; }
+.variable-table td.field { font-family: 'Inter Tight', sans-serif; font-weight: 700; width: 240px; }
+.variable-table tbody tr:nth-child(even) { background: rgba(15,15,15,0.02); }
+
+.checklist { background: var(--sage); color: var(--paper); max-width: none; padding: 80px 32px; }
+.checklist-inner { max-width: 1240px; margin: 0 auto; }
+.checklist-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 48px; margin-top: 40px; }
+.check-row { display: grid; grid-template-columns: 32px 1fr; gap: 14px; padding: 16px 0; border-top: 1px solid var(--rule-light); align-items: start; }
+.check-mark { width: 22px; height: 22px; border: 1.5px solid var(--paper); border-radius: 4px; position: relative; flex-shrink: 0; margin-top: 2px; }
+.check-mark::after { content: '✓'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--paper); }
+.check-body { font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 17px; line-height: 1.4; color: var(--paper); }
+.check-body small { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 13px; color: rgba(245,242,234,0.75); display: block; margin-top: 4px; line-height: 1.5; }
+
+footer { background: var(--sage-deep); color: rgba(245,242,234,0.7); padding: 56px 32px; }
+.footer-inner { max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; flex-wrap: wrap; gap: 16px; }
+
+@media (max-width: 900px) {
+  .hero { padding: 56px 24px 64px; }
+  section, .brand-inner, .variable-section, .checklist-inner, .checklist { padding: 64px 24px; }
+  .steps, .brand-grid, .logo-section, .checklist-list { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-rom"><span class="rom-dot"></span> Rank On Maps · Canva Handover</div>
+    <a class="topbar-back" href="index.html">← back to pack</a>
+  </div>
+</div>
+
+<section class="hero" style="max-width: none;">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-meta">
+      <span>Builders Collective</span>
+      <span>Canva Edit Handover · v1</span>
+      <span>2026-06-06</span>
+    </div>
+    <div class="hero-eyebrow">For BC team · edit any page in Canva</div>
+    <h1 class="hero-title">edit the pack <span class="italic">in canva.</span></h1>
+    <div class="hero-sub">three steps. import the PDF, set up the brand kit, edit any page like a normal Canva design. no Adobe, no exporting headaches.</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-num">01 · The Three Steps</div>
+  <h2 class="section-title">how it <span class="italic">works.</span></h2>
+  <div class="section-sub">Canva imports a PDF and converts every page into a fully editable design. You drop in BC fonts and hex codes once, then it just works.</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-tag">5 minutes · one-time</div>
+      <div class="step-title">Download the PDF.</div>
+      <div class="step-body">Grab the latest first appointment pack PDF. This is the source you'll import into Canva. Re-download whenever a new revision drops.</div>
+      <a class="step-action" href="Builders-Collective-First-Appointment-Pack.pdf" download>Download PDF ↓</a>
+      <div class="step-receipt">15 pages · A4 · 7.7 MB</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-tag">10 minutes · one-time</div>
+      <div class="step-title">Import into Canva.</div>
+      <div class="step-body">In Canva: top-right "Create a design" → "Import file" → upload the PDF. Canva auto-converts each page into an editable design. Save it as "BC First Appointment Pack — MASTER" and never edit the master directly.</div>
+      <a class="step-action" href="https://www.canva.com/upload-pdf-to-canva/" target="_blank">Open Canva PDF import →</a>
+      <div class="step-receipt">15 pages · editable · text + images</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-tag">10 minutes · per client</div>
+      <div class="step-title">Duplicate + edit.</div>
+      <div class="step-body">For each new client: open MASTER → "Make a copy" → rename to client surname → edit the 12 variable fields listed below → Share → Download as PDF Print. Email to the client.</div>
+      <div class="step-receipt">PDF Print · CMYK if printing · RGB if emailing</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-tag">Brand kit · 15 minutes</div>
+      <div class="step-title">Set the BC Brand Kit.</div>
+      <div class="step-body">In Canva Pro: left sidebar → Brand → Brand Kit → set the BC hex codes and upload DM Sans. Means every new text box defaults to your brand and you stop fixing fonts manually.</div>
+      <a class="step-action" href="https://www.canva.com/brand/brand-kit/" target="_blank">Open Canva Brand Kit →</a>
+      <div class="step-receipt">Canva Pro required · once per workspace</div>
+    </div>
+  </div>
+</section>
+
+<section class="brand-section" style="max-width: none;">
+  <div class="brand-inner">
+    <div class="section-num">02 · The Brand Kit</div>
+    <h2 class="section-title">copy these into <span class="italic">canva.</span></h2>
+    <div class="section-sub">Paste these into Canva's Brand Kit once and your team never thinks about brand again.</div>
+
+    <div class="brand-grid">
+      <div class="brand-card">
+        <div class="brand-card-label">Colors · paste hex codes</div>
+        <div class="color-list">
+          <div class="color-tile">
+            <div class="color-swatch" style="background: #062A15;"></div>
+            <div>
+              <div class="color-name">Forest</div>
+              <div class="color-hex">#062A15</div>
+            </div>
+          </div>
+          <div class="color-tile">
+            <div class="color-swatch" style="background: #0F4325;"></div>
+            <div>
+              <div class="color-name">Forest Deep</div>
+              <div class="color-hex">#0F4325</div>
+            </div>
+          </div>
+          <div class="color-tile">
+            <div class="color-swatch" style="background: #EAFD98;"></div>
+            <div>
+              <div class="color-name">Spark</div>
+              <div class="color-hex">#EAFD98</div>
+            </div>
+          </div>
+          <div class="color-tile">
+            <div class="color-swatch" style="background: #F8F8F8; border: 1px solid var(--rule);"></div>
+            <div>
+              <div class="color-name">Paper</div>
+              <div class="color-hex">#F8F8F8</div>
+            </div>
+          </div>
+          <div class="color-tile">
+            <div class="color-swatch" style="background: #262626;"></div>
+            <div>
+              <div class="color-name">Ink</div>
+              <div class="color-hex">#262626</div>
+            </div>
+          </div>
+          <div class="color-tile">
+            <div class="color-swatch" style="background: #EFEAD8;"></div>
+            <div>
+              <div class="color-name">Cream</div>
+              <div class="color-hex">#EFEAD8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-label">Fonts · DM Sans only</div>
+        <div class="font-list">
+          <div class="font-row">
+            <div class="font-name">DM Sans Black</div>
+            <div class="font-meta">Weight 900 · Headlines · Wordmarks · Big numbers</div>
+            <a class="font-link" href="https://fonts.google.com/specimen/DM+Sans" target="_blank">Get DM Sans →</a>
+          </div>
+          <div class="font-row">
+            <div class="font-name" style="font-weight: 700; font-size: 28px;">DM Sans Bold</div>
+            <div class="font-meta">Weight 700 · Sub-headings · Card titles</div>
+          </div>
+          <div class="font-row">
+            <div class="font-name" style="font-weight: 500; font-size: 22px;">DM Sans Medium</div>
+            <div class="font-meta">Weight 500 · Eyebrows · Tags · Labels (UPPERCASE + tracked)</div>
+          </div>
+          <div class="font-row">
+            <div class="font-name" style="font-weight: 400; font-size: 22px;">DM Sans Regular</div>
+            <div class="font-meta">Weight 400 · Body copy · Captions</div>
+          </div>
+          <div class="font-row">
+            <div class="font-name italic" style="font-size: 26px;">DM Sans Italic</div>
+            <div class="font-meta">Weight 300 italic · Accents · "italic word" highlights</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="brand-card" style="grid-column: 1 / -1;">
+        <div class="brand-card-label">Logo files · upload to Canva Brand Kit</div>
+        <div class="logo-section">
+          <div class="logo-card dark">
+            <img src="assets/bc-logo-white-full.png" alt="BC white logo">
+            <div class="logo-card-label">White on Forest · use on dark pages</div>
+            <a class="logo-download" href="assets/bc-logo-white-full.png" download>Download PNG ↓</a>
+          </div>
+          <div class="logo-card light">
+            <img src="assets/bc-logo-dark-full.png" alt="BC dark logo">
+            <div class="logo-card-label">Apex on Paper · use on light pages</div>
+            <a class="logo-download" href="assets/bc-logo-dark-full.png" download>Download PNG ↓</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="variable-section">
+  <div class="section-num">03 · The Variable Fields</div>
+  <h2 class="section-title">the 12 fields you edit <span class="italic">per client.</span></h2>
+  <div class="section-sub">Everything else stays locked. Only edit these. Roughly 10 minutes per client.</div>
+
+  <table class="variable-table">
+    <thead>
+      <tr>
+        <th>Page</th>
+        <th>Field</th>
+        <th>Example value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="page">01 · Cover</td>
+        <td class="field">Client surname tag</td>
+        <td>"prepared for the smith family"</td>
+      </tr>
+      <tr>
+        <td class="page">02 · Welcome</td>
+        <td class="field">Personal note (optional)</td>
+        <td>Swap the "Who we are" block for a 2-line personal welcome if it's a high-touch client.</td>
+      </tr>
+      <tr>
+        <td class="page">03 · Scenarios</td>
+        <td class="field">Highlight scenario</td>
+        <td>Change the Spark-colored scenario tile to match the one the client identified with on the call.</td>
+      </tr>
+      <tr>
+        <td class="page">04 · Finance</td>
+        <td class="field">FHOG amount (if it changes)</td>
+        <td>$10K · update if WA changes the grant</td>
+      </tr>
+      <tr>
+        <td class="page">08 · Journey</td>
+        <td class="field">PPA fee</td>
+        <td>$3,000 · update to whatever the actual figure is per build</td>
+      </tr>
+      <tr>
+        <td class="page">08 · Journey</td>
+        <td class="field">Land deposit</td>
+        <td>$2,000 · same — replace with the real number</td>
+      </tr>
+      <tr>
+        <td class="page">09 · Suburbs</td>
+        <td class="field">Highlight tier</td>
+        <td>Change which tier is the Spark-colored "featured" tile to match the client's budget band.</td>
+      </tr>
+      <tr>
+        <td class="page">12 · Costs</td>
+        <td class="field">Itemised dollar amounts</td>
+        <td>Land · Siteworks · House · Variations · PPA Fee · Total · fill in from the live quote</td>
+      </tr>
+      <tr>
+        <td class="page">13 · Shortlist</td>
+        <td class="field">Stamp dollar saving</td>
+        <td>$36,300 · the real wholesale saving for this client's build</td>
+      </tr>
+      <tr>
+        <td class="page">13 · Shortlist</td>
+        <td class="field">Shortlist suburb + bed count</td>
+        <td>"Byford · 4 BED" · match the client's brief</td>
+      </tr>
+      <tr>
+        <td class="page">13 · Shortlist</td>
+        <td class="field">4 builder rows</td>
+        <td>Builder name · base price · wholesale · saving · build time · for the 4 builders you're putting forward</td>
+      </tr>
+      <tr>
+        <td class="page">13 · Shortlist</td>
+        <td class="field">Pick row</td>
+        <td>Which builder gets the Spark-colored "pick" row · your recommendation</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="checklist" style="max-width: none;">
+  <div class="checklist-inner">
+    <div class="section-num" style="color: rgba(245,242,234,0.55);"><span style="background: rgba(245,242,234,0.45);"></span>04 · Per-Client Checklist</div>
+    <h2 class="section-title" style="color: var(--paper);">10-minute <span class="italic" style="color: var(--paper); font-family: 'Fraunces', serif;">workflow.</span></h2>
+    <div class="section-sub" style="color: rgba(245,242,234,0.85);">Run this every time you prep a pack for a new client. Don't skip the rename step.</div>
+
+    <div class="checklist-list">
+      <div class="check-row">
+        <div class="check-mark"></div>
+        <div class="check-body">Open MASTER in Canva<small>Never edit MASTER directly. Always duplicate first.</small></div>
+      </div>
+      <div class="check-row">
+        <div class="check-mark"></div>
+        <div class="check-body">File → Make a copy<small>Top-left File menu in Canva.</small></div>
+      </div>
+      <div class="check-row">
+        <div class="check-mark"></div>
+        <div class="check-body">Rename to "BC FAP · [Client Surname] · [Date]"<small>e.g. "BC FAP · Smith · 2026-06-10". Makes it easy to find later.</small></div>
+      </div>
+      <div class="check-row">
+        <div class="check-mark"></div>
+        <div class="check-body">Edit the 12 variable fields<small>Use the table above. Don't touch anything else.</small></div>
+      </div>
+      <div class="check-row">
+        <div class="check-mark"></div>
+        <div class="check-body">Highlight the right scenario + tier<small>Page 03 + page 09 · change which tile is Spark-colored.</small></div>
+      </div>
+      <div class="check-row">
+        <div class="check-mark"></div>
+        <div class="check-body">Confirm contact email still reads admin@builderscollective.au<small>Page 15. Don't let an old Gmail sneak back in.</small></div>
+      </div>
+      <div class="check-row">
+        <div class="check-mark"></div>
+        <div class="check-body">Share → Download → PDF Print<small>Print-quality PDF. ~7-10 MB output.</small></div>
+      </div>
+      <div class="check-row">
+        <div class="check-mark"></div>
+        <div class="check-body">Email PDF · CC GHL for record<small>So the activity log captures the deliverable.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-num">05 · If You Get Stuck</div>
+  <h2 class="section-title">when canva <span class="italic">misbehaves.</span></h2>
+  <div class="section-sub">Two known import quirks and how to fix them.</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-tag">Quirk 01</div>
+      <div class="step-title">Fonts look wrong after import.</div>
+      <div class="step-body">Canva imports the PDF with embedded fonts, but if it can't read DM Sans it falls back to a default. Fix: select all text on the page (Ctrl+A) and re-apply DM Sans from the font dropdown. The Brand Kit makes this a one-click.</div>
+    </div>
+    <div class="step">
+      <div class="step-tag">Quirk 02</div>
+      <div class="step-title">REIWA map pages look pixelated.</div>
+      <div class="step-body">The REIWA maps on pages 10-11 are high-res but Canva down-samples on import. Don't try to edit them in Canva. Either keep those pages as-is, or delete them in Canva and re-insert the original PNGs from the asset links below.</div>
+      <div class="step-receipt"><a href="assets/reiwa-north.png" download style="color: var(--sage); border-bottom: 1px solid var(--sage); padding-bottom: 2px;">North PNG ↓</a> · <a href="assets/reiwa-south.png" download style="color: var(--sage); border-bottom: 1px solid var(--sage); padding-bottom: 2px;">South PNG ↓</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span>Built by Rank On Maps</span>
+    <span>Canva Handover · v1 · 2026-06-06</span>
+    <span><a href="index.html" style="color: rgba(245,242,234,0.75);">← back to pack</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
